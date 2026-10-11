@@ -38,6 +38,8 @@ export const labels = {
     notFoundMessage: "This wisdom entry doesn't exist in this language yet.",
     errorTitle: 'Something went wrong',
     errorMessage: 'We could not load the wisdom corpus. Please try again later.',
+    propose: 'Propose a quote',
+    proposeLoginPrompt: 'Log in to propose a quote.',
   },
   es: {
     wisdom: 'Sabiduría', docs: 'Documentación', empty: 'Todavía no hay sabiduría aceptada en español.',
@@ -47,6 +49,8 @@ export const labels = {
     notFoundMessage: 'Esta entrada de sabiduría todavía no existe en este idioma.',
     errorTitle: 'Algo ha fallado',
     errorMessage: 'No hemos podido cargar el corpus de sabiduría. Inténtalo de nuevo más tarde.',
+    propose: 'Proponer una cita',
+    proposeLoginPrompt: 'Inicia sesión para proponer una cita.',
   },
 } as const;
 
