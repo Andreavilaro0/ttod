@@ -67,6 +67,13 @@ server-side exactly-once execution. The prior Task 4 live-backend smoke outcome 
 recorded separately in the contract note. Tests follow the project's
 [Unit 5 testing strategy](https://ruvebal.github.io/web-atelier-udit/lessons/en/feii/unit-5-testing-strategy/).
 
+The supplemental `tsc --noEmit --project tsconfig.pwa.json` pass includes
+`contracts/astro-components.d.ts`, which types `.astro` imports as the framework's
+`AstroComponentFactory`. The main `tsconfig.json` excludes that declaration so
+Astro can still reject missing component paths and validate component props.
+Both passes remain required: plain TypeScript also catches duplicate JSX
+attributes that Astro filters out. The consumer contract compiles independently.
+
 The watcher covers `src/`, `public/`, `contracts/`, `e2e/`, `scripts/`, package and
 lock files, frontend TypeScript/Astro/Playwright configuration, the frontend CI
 workflow, and these two PWA notes. It ignores generated build/test output. It sees
