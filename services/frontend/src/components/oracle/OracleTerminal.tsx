@@ -214,8 +214,8 @@ export default function OracleTerminal({ locale }: Props) {
         }));
       });
       if (received === 0) throw new Error('Oracle stream completed without an answer');
-      updateExchange(id, (exchange) => ({ ...exchange, state: 'complete' }));
       if (queuedEntry) await markEntrySynced(queuedEntry);
+      updateExchange(id, (exchange) => ({ ...exchange, state: 'complete' }));
       return true;
     } catch (error) {
       // Two failures that look similar and are not, so they get different UI (Task 6, brief §3):
@@ -248,16 +248,29 @@ export default function OracleTerminal({ locale }: Props) {
     if (syncingRef.current || typeof navigator === 'undefined' || !navigator.onLine) return;
     syncingRef.current = true;
     setSyncing(true);
+
     try {
-      const entries = await listUnsyncedEntries();
-      for (const entry of entries) {
-        if (entry.kind === 'oracle-query') {
+      const replay = async () => {
+        // Read after acquiring the lock so another tab's successes are excluded.
+        const entries = await listUnsyncedEntries();
+        for (const entry of entries) {
+          if (!navigator.onLine) break;
+          if (entry.kind !== 'oracle-query') continue;
           const succeeded = await sendPayload(entry.payload as OracleQueryPayload, entry);
           if (!succeeded) break;
         }
+      };
+
+      if ('locks' in navigator) {
+        await navigator.locks.request('ttod-oracle-flush', { ifAvailable: true }, async (lock) => {
+          if (lock && navigator.onLine) await replay();
+        });
+      } else {
+        // Older browsers retain the existing per-component overlap guard.
+        await replay();
       }
-    } catch {
-      // A private-mode/browser IndexedDB failure must not break the terminal or online requests.
+    } catch (error) {
+      console.warn('Offline Oracle queue flush failed:', error);
     } finally {
       syncingRef.current = false;
       setSyncing(false);
@@ -269,7 +282,7 @@ export default function OracleTerminal({ locale }: Props) {
     window.addEventListener('online', onOnline);
     if (navigator.onLine) void flushQueue();
     return () => window.removeEventListener('online', onOnline);
-  }, []); // The online listener deliberately binds once; flushQueue reads the durable queue.
+  }, [flushQueue]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
