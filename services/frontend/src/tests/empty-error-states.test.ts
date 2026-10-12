@@ -84,7 +84,7 @@ describe('empty and error states never leave a blank page or a stack trace', () 
   it('facet route: zero matches -> translated empty state; a failing fetch -> translated error state', async () => {
     mockFetchOk([entry]);
     const empty = await render(SectionRoute, '/en/wisdom/sections/no-such-section/', { locale: 'en', section: 'no-such-section' });
-    expect(empty.querySelector('.ttod-empty h2')?.textContent).toBe('Nothing here yet');
+    expect(empty.querySelector('.ttod-empty h2')?.textContent).toBe('No matches');
 
     mockFetchDown();
     const errored = await render(SectionRoute, '/en/wisdom/sections/architecture/', { locale: 'en', section: 'architecture' });

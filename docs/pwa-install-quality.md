@@ -62,8 +62,8 @@ rsvg-convert --width 512 --height 512 --background-color '#fbf8f1' --output serv
 with `magick identify` confirmed both PNG formats and target dimensions. That file
 inspection does not establish visual quality in the operating system's launcher.
 Assistant visual review of both actual exports found the centered TTOD mark,
-paper background, clear padding and no clipping. OS launcher and window-chrome appearance remain
-unreported.
+paper background, clear padding and no clipping. On 2026-10-11 the developer also
+confirmed that the installed icon looks correct in Omarchy.
 
 The existing SVG browser favicon link remains in Page.astro. Installation icons
 are defined in the manifest. The Oracle payloads, queue helpers, IndexedDB schema,
@@ -155,7 +155,7 @@ A headed system Chromium `152.0.7977.82` on Omarchy `4.0.4` used a disposable pr
 
 Installation and relaunch used the real [Chrome DevTools Protocol PWA commands](https://chromedevtools.github.io/devtools-protocol/tot/PWA/). DevTools installs default to browser display mode; the check selected the installed app's actual standalone preference using `PWA.changeAppUserSettings` before launch. It did not emulate display mode or fabricate an install event. The root start URL redirected to `/en/`; closing and relaunching the app again yielded standalone mode. This verifies installed browser behavior, not a human click on a native install dialog or an OS launcher.
 
-The installed Oracle window passed Axe and keyboard activation of open/close controls with `prefers-reduced-motion: reduce` enabled. App viewport screenshots were captured and inspected locally. Full manual focus/navigation/motion review and OS launcher icon/window-chrome appearance remain human checks. The test app was uninstalled and both temporary servers stopped afterward; the developer's existing Brave profile was not used.
+The installed Oracle window passed Axe and keyboard activation of open/close controls with `prefers-reduced-motion: reduce` enabled. App viewport screenshots were captured and inspected locally. At that time, full manual focus/navigation/motion and OS launcher icon/window-chrome observations were still outstanding; the guided October 11 results follow below. The test app was uninstalled and both temporary servers stopped afterward; the developer's existing Brave profile was not used.
 
 | Verification item | Status | Evidence or remaining work |
 | --- | --- | --- |
@@ -164,13 +164,38 @@ The installed Oracle window passed Axe and keyboard activation of open/close con
 | Icon source and visual inspection | Recorded / passed | Existing SVG exports; `rsvg-convert` 2.62.3 documented; both current PNGs inspected without clipping. |
 | Current browser manifest/installability diagnostics | Passed | Chromium returned empty manifest and installability error lists. |
 | Browser-generated install eligibility event | Observed | Actual `beforeinstallprompt` event in the fresh headed profile. |
-| Developer installation | Passed, developer-reported | Successful installation reported on 2026-10-07; user identified Brave on Omarchy on 2026-10-08. Exact Brave version and flow were not supplied. |
+| Developer installation | Passed, developer-reported | On 2026-10-11, Brave 1.96.61 / Chromium 154.0.8037.98 on Linux/Omarchy installed the exact Task 5 head `a9d6c0b`; the app appears in Apps as “The Tao Of Development”. |
 | Installed launch/relaunch and display | Passed, automated | Real CDP installation, installed standalone preference, `/` → `/en/`, standalone true on launch and relaunch. |
 | Installed Oracle keyboard/Axe with reduced motion | Passed, automated | Open/close controls activate with Enter; Axe violations empty with reduced motion enabled. |
-| Full manual accessibility and OS launcher appearance | Unreported | Native dialog, launcher name/icon/chrome appearance and complete focus/motion review still need human evidence. |
-| Hosted CI for repaired Task 5 | Pending publication | Check both jobs at the new head; final-main re-review follows #49. |
+| OS launcher and window appearance | Passed, developer-reported | On 2026-10-11 the developer confirmed the icon looks correct and reopening from the launcher gives a window without the usual address bar. |
+| Guided manual accessibility | Recorded, developer-reported | Bilingual keyboard/focus/label checks passed. The installed Spanish Oracle reports standalone true and reduced motion true; the developer observes no displacement with reduce enabled. |
+| Hosted CI for repaired Task 5 | Passed at published head | Both jobs passed for `a9d6c0b` in [run 37801649493](https://github.com/ruvebal/ttod/actions/runs/37801649493). Any later integrated head needs its own CI result. |
 
 The removed Lighthouse PWA category is not reported as a passing audit. Current diagnostics and actual install/relaunch results supply the installability evidence; human observations are kept separate.
+
+### Guided developer check — 2026-10-11
+
+The developer used Brave 1.96.61 (Chromium 154.0.8037.98) on Linux/Omarchy against
+the exact published Task 5 source `a9d6c0b`, served locally at
+`http://127.0.0.1:18905/en/`. They reported successful installation, the launcher
+name “The Tao Of Development”, a correctly displayed icon, and reopening in an
+application window without the usual address bar. These are human observations,
+separate from the earlier automated CDP checks. The developer also confirmed
+visible focus, keyboard open/close with Enter/Escape, control navigation and a
+clear question label in both locales. The actual installed-window standalone
+media query returned `true`. After selecting `reduce` and reloading, the developer
+observed that the displacement disappeared. The final combined console check
+confirmed the installed Spanish Oracle URL, `reduce: true` and `standalone: true`;
+the earlier `false` preference result was superseded by this explicit check.
+The temporary localhost origin is a test installation.
+
+A separate assistant-run Chromium check applied the motion preference before
+navigation. With `no-preference`, closing took approximately 252ms and included
+translation/scaling. With `reduce`, it took approximately 14ms without displacement;
+the toggle retained keyboard focus in both cases. These timings describe this
+local check, not a performance budget. The installed Framer Motion hook reads the
+preference when the component mounts, so the guided emulation check reloads after
+changing the preference.
 
 ## AI-use and review record
 
@@ -180,4 +205,4 @@ frontend copy. The developer applied the local manifest/icon/spec changes and
 created the Task 5 branch. AI assistance then prepared this shared documentation,
 updated the monitor note, inspected the actual PNG dimensions/appearance, corrected
 the misplaced matcher and missing final newlines, and ran the full guard and complete
-Chromium regression suite. During the 2026-10-08 repair, AI assistance rebased the task, strengthened canonical-manifest/Chromium diagnostics coverage, ran the current checks and verified a real disposable CDP installation and standalone relaunch. The developer separately reported successful Brave installation on Omarchy. Automated installed-window checks do not establish complete human accessibility or OS launcher review; remaining evidence is recorded above.
+Chromium regression suite. During the 2026-10-08 repair, AI assistance rebased the task, strengthened canonical-manifest/Chromium diagnostics coverage, ran the current checks and verified a real disposable CDP installation and standalone relaunch. The developer separately reported successful Brave installation on Omarchy. The guided developer check on 2026-10-11 supplies launcher/icon/window, bilingual keyboard/focus and reduced-motion observations, recorded separately above.
