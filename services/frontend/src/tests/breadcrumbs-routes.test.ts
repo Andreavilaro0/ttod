@@ -6,10 +6,20 @@ import type { WisdomEntry } from '../types/domain';
 
 const { fetchWisdom } = vi.hoisted(() => ({ fetchWisdom: vi.fn() }));
 
-vi.mock('../content/wisdom', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('../content/wisdom')>()),
-  fetchWisdom,
-}));
+vi.mock('../content/wisdom', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('../content/wisdom')>();
+  return {
+    ...mod,
+    fetchWisdom,
+    loadWisdom: async (locale: 'en' | 'es') => {
+      try {
+        return { entries: await fetchWisdom(locale), failed: false };
+      } catch {
+        return { entries: [], failed: true };
+      }
+    },
+  };
+});
 
 import IndexRoute from '../pages/[locale]/wisdom/index.astro';
 import SlugRoute from '../pages/[locale]/wisdom/[slug].astro';
