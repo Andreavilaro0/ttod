@@ -78,7 +78,7 @@ export function endingPatch({ file, before, after }) {
 export async function snapshot(frontend) {
   const files = new Map();
   const roots = ['src', 'public', 'contracts', 'e2e', 'scripts', 'package.json', 'package-lock.json',
-    'tsconfig.json', 'astro.config.mjs', 'playwright.config.ts', 'playwright.pwa.config.ts',
+    'tsconfig.json', 'tsconfig.pwa.json', 'astro.config.mjs', 'playwright.config.ts', 'playwright.pwa.config.ts',
     '../../.github/workflows/ci.yml', '../../docs/pwa-offline-queue.md', '../../docs/pwa-compatibility-monitor.md'];
   async function visit(path) {
     try {
