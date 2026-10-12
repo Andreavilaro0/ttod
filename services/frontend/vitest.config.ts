@@ -1,8 +1,7 @@
 /// <reference types="vitest/config" />
 import { getViteConfig } from 'astro/config';
 
-// getViteConfig (not a bare defineConfig) so vitest can resolve `.astro` imports: component tests
-// and facet-route tests render real .astro files through Astro's container API.
+// getViteConfig so vitest can resolve `.astro` imports for container API tests.
 export default getViteConfig({
   test: {
     exclude: [
