@@ -96,7 +96,7 @@ async function run() {
       const commands = [
         ['Guard regression checks', process.execPath, ['--test', 'scripts/pwa-guard.node-test.mjs']],
         ['Astro diagnostics', npm, ['run', 'check']],
-        ['Frontend TypeScript', process.execPath, ['node_modules/typescript/bin/tsc', '--noEmit']],
+        ['Frontend TypeScript', process.execPath, ['node_modules/typescript/bin/tsc', '--noEmit', '--project', 'tsconfig.pwa.json']],
         ['Production build', npm, ['run', 'build']],
         ['Queue browser integration', process.execPath, ['node_modules/@playwright/test/cli.js', 'test', '--config', 'playwright.pwa.config.ts', '--project', 'chromium']],
       ];

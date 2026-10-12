@@ -87,6 +87,13 @@ top-level copy. That configuration has been corrected; the full local guard now
 passes all eight cases. The [Task 5 install note](pwa-install-quality.md) records
 separate CDP install/relaunch checks and developer-reported Brave installation.
 
+The supplemental `tsc --noEmit --project tsconfig.pwa.json` pass includes
+`contracts/astro-components.d.ts`, which types `.astro` imports as the framework's
+`AstroComponentFactory`. The main `tsconfig.json` excludes that declaration so
+Astro can still reject missing component paths and validate component props.
+Both passes remain required: plain TypeScript also catches duplicate JSX
+attributes that Astro filters out. The consumer contract compiles independently.
+
 The watcher covers `src/`, `public/`, `contracts/`, `e2e/`, `scripts/`, package and
 lock files, frontend TypeScript/Astro/Playwright configuration, the frontend CI
 workflow, `docs/pwa-offline-queue.md` and `docs/pwa-compatibility-monitor.md`. It
