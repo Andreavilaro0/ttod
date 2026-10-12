@@ -30,6 +30,12 @@ export interface WisdomEntry {
   };
 }
 
+export interface FavoriteEntry {
+  userId: string;
+  quoteId: string;
+  savedAt: string;
+}
+
 export interface GraphNode {
   id: string;
   section: string;
@@ -74,4 +80,6 @@ export interface OfflineLogEntry {
   kind: 'oracle-query' | 'error-report';
   payload: OracleQueryPayload | { errorLog: string };
   synced: boolean;
+  /** Assigned by IndexedDB when first saved; retained when marked synced. */
+  queueOrder?: number;
 }
