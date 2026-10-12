@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import tempfile
+import time
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 from passlib.context import CryptContext
@@ -20,6 +23,7 @@ from services.backend.app.oracle import (
     thematic_frame,
 )
 from services.backend.app.storage import SnapshotService
+from ttod_core.proposals import create_proposal
 
 
 class FakeOllama:
@@ -56,6 +60,23 @@ class BackendTests(unittest.TestCase):
 
     def tearDown(self):
         self.temp.cleanup()
+
+    def sign_in(self) -> None:
+        login = self.client.post("/api/v1/auth/login", json={
+            "email": "admin@ttod.local", "password": "seeded-user-token",
+        })
+        self.client.cookies.set("ttod_session", login.json()["session_token"])
+
+    def issue_pat(self) -> tuple[str, str]:
+        """Devuelve (sesión, PAT) y deja el cliente sin cookies, como un cliente externo."""
+        login = self.client.post("/api/v1/auth/login", json={
+            "email": "admin@ttod.local", "password": "seeded-user-token",
+        })
+        session_token = login.json()["session_token"]
+        issued = self.client.post("/api/v1/auth/token", cookies={"ttod_session": session_token})
+        self.assertEqual(issued.status_code, 200)
+        self.client.cookies.clear()
+        return session_token, issued.json()["access_token"]
 
     def test_login_validates_seeded_credentials_and_issues_a_verified_session(self):
         denied = self.client.post("/api/v1/auth/login", json={
@@ -177,6 +198,149 @@ class BackendTests(unittest.TestCase):
         self.assertEqual(persisted["status"], "proposed")
         self.assertNotEqual(persisted.get("status"), "active")
         self.assertNotIn("accepted_quote_id", persisted)
+
+    def test_token_endpoint_issues_a_pat_that_is_not_the_session_value(self):
+        anonymous = self.client.post("/api/v1/auth/token")
+        self.assertEqual(anonymous.status_code, 401)
+
+        session_token, pat = self.issue_pat()
+
+        self.assertNotEqual(pat, session_token)
+        as_session = self.client.get("/api/v1/auth/session", cookies={"ttod_session": pat})
+        self.assertEqual(as_session.status_code, 401)
+
+    def test_random_wisdom_returns_a_quote_for_a_valid_bearer_token(self):
+        _session_token, pat = self.issue_pat()
+
+        response = self.client.get("/api/v1/wisdom/random", headers={"Authorization": f"Bearer {pat}"})
+
+        self.assertEqual(response.status_code, 200)
+        quote = response.json()
+        for field in ("id", "section", "level", "text", "tags", "origin"):
+            self.assertIn(field, quote)
+        self.assertIn(quote["id"], {entry["id"] for entry in self.snapshots.wisdom()})
+
+    def test_random_wisdom_rejects_a_missing_token(self):
+        response = self.client.get("/api/v1/wisdom/random")
+
+        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.headers["www-authenticate"], "Bearer")
+        self.assertEqual(response.json(), {"detail": "Bearer access token required"})
+
+    def test_random_wisdom_rejects_an_invalid_token(self):
+        response = self.client.get(
+            "/api/v1/wisdom/random",
+            headers={"Authorization": "Bearer not-a-signed-token"},
+        )
+
+        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.json(), {"detail": "Invalid or expired access token"})
+
+    def test_random_wisdom_rejects_a_session_cookie_on_its_own(self):
+        session_token, _pat = self.issue_pat()
+
+        response = self.client.get("/api/v1/wisdom/random", cookies={"ttod_session": session_token})
+
+        self.assertEqual(response.status_code, 401)
+        self.assertNotIn("text", response.json())
+
+    def test_random_wisdom_rejects_a_session_value_presented_as_bearer(self):
+        session_token, _pat = self.issue_pat()
+
+        response = self.client.get(
+            "/api/v1/wisdom/random",
+            headers={"Authorization": f"Bearer {session_token}"},
+        )
+
+        self.assertEqual(response.status_code, 401)
+
+    def test_random_wisdom_rejects_an_expired_token(self):
+        _session_token, pat = self.issue_pat()
+
+        with patch("itsdangerous.timed.time.time", return_value=time.time() + self.settings.pat_ttl_seconds + 60):
+            response = self.client.get("/api/v1/wisdom/random", headers={"Authorization": f"Bearer {pat}"})
+
+        self.assertEqual(response.status_code, 401)
+
+    def test_proposal_api_rejects_anonymous_requests_without_storing_anything(self):
+        response = self.client.post(
+            "/api/v1/proposals",
+            json={"text": "A useful quote", "section": "wisdom"},
+        )
+
+        self.assertEqual(response.status_code, 401)
+        self.assertEqual(list(Path(self.temp.name).glob("*.json")), [])
+
+    def test_proposal_api_rejects_invalid_or_client_owned_fields(self):
+        self.sign_in()
+
+        empty_text = self.client.post("/api/v1/proposals", json={"text": "", "section": "wisdom"})
+        forged_origin = self.client.post(
+            "/api/v1/proposals",
+            json={"text": "A useful quote", "section": "wisdom", "origin": "blackbox"},
+        )
+
+        self.assertEqual(empty_text.status_code, 422)
+        self.assertEqual(forged_origin.status_code, 422)
+        self.assertEqual(list(Path(self.temp.name).glob("*.json")), [])
+
+    def test_proposal_api_returns_the_id_of_a_stored_draft_and_leaves_the_corpus_untouched(self):
+        self.sign_in()
+        payload = {
+            "text": "A useful quote",
+            "section": "wisdom",
+            "source": "student observation",
+            "level": "advanced",
+            "tags": ["simplicity"],
+            "teaches": "Prefer the smallest useful change.",
+            "lang": "en",
+        }
+        corpus_before = hashlib.sha256(self.settings.ttod_path.read_bytes()).digest()
+
+        response = self.client.post("/api/v1/proposals", json=payload)
+
+        self.assertEqual(response.status_code, 201)
+        created = response.json()
+        self.assertEqual(set(created), {"proposal_id", "status"})
+        self.assertEqual(created["status"], "proposed")
+
+        stored = json.loads((Path(self.temp.name) / f"{created['proposal_id']}.json").read_text(encoding="utf-8"))
+        self.assertEqual(stored["status"], "proposed")
+        self.assertEqual(stored["proposer_id"], "usr-001")
+        self.assertEqual(stored["proposer_kind"], "human")
+        self.assertEqual(stored["candidate_content"], {**payload, "origin": "human"})
+        self.assertNotIn("accepted_quote_id", stored)
+        self.assertEqual(hashlib.sha256(self.settings.ttod_path.read_bytes()).digest(), corpus_before)
+
+    def test_proposal_api_delegates_to_the_shared_create_proposal_primitive(self):
+        self.sign_in()
+        with patch("services.backend.app.main.create_proposal", wraps=create_proposal) as primitive:
+            response = self.client.post(
+                "/api/v1/proposals",
+                json={"text": "A useful quote", "section": "wisdom"},
+            )
+
+        self.assertEqual(response.status_code, 201)
+        primitive.assert_called_once_with(
+            candidate_content={
+                "text": "A useful quote", "section": "wisdom", "level": "intermediate",
+                "origin": "human", "lang": "en",
+            },
+            proposer_kind="human",
+            proposer_id="usr-001",
+            generation_method="api-proposal-create",
+        )
+
+    def test_proposal_api_reports_a_storage_failure_without_leaking_the_path(self):
+        self.sign_in()
+        with patch("services.backend.app.main.ProposalStore.save", side_effect=OSError("disk full")):
+            response = self.client.post(
+                "/api/v1/proposals",
+                json={"text": "A useful quote", "section": "wisdom"},
+            )
+
+        self.assertEqual(response.status_code, 500)
+        self.assertEqual(response.json(), {"detail": "Unable to save proposal"})
 
     def test_r2_envelope_normalization(self):
         payload = {"results": [{

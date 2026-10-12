@@ -1,9 +1,15 @@
 from __future__ import annotations
 
+import logging
+import random
+
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.responses import Response, StreamingResponse
 
-from .auth import AuthService, RequireSession, SessionClaims
+from ttod_core.proposals import create_proposal
+from ttod_core.repository import ProposalStore
+
+from .auth import AccessTokenClaims, AuthService, RequireAccessToken, RequireSession, SessionClaims
 from .config import Settings
 from .favorites import add_favorite, get_favorites, remove_favorite
 from .models import (
@@ -13,9 +19,15 @@ from .models import (
     FavoriteRequest,
     OracleProposeRequest,
     OracleQueryPayload,
+    ProposalCreated,
+    ProposalRequest,
+    TokenResponse,
 )
 from .oracle import OracleService
 from .storage import SnapshotService
+
+
+logger = logging.getLogger(__name__)
 
 
 def create_app(settings: Settings | None = None, oracle: OracleService | None = None) -> FastAPI:
@@ -27,8 +39,11 @@ def create_app(settings: Settings | None = None, oracle: OracleService | None = 
         settings.session_ttl_seconds,
         settings.admin_email,
         settings.admin_password_hash,
+        settings.pat_secret,
+        settings.pat_ttl_seconds,
     )
     require_session = RequireSession(auth_service)
+    require_access_token = RequireAccessToken(auth_service)
     app = FastAPI(title="TTOD Oracle Backend", version="1.0.0")
 
     @app.get("/health")
@@ -61,6 +76,20 @@ def create_app(settings: Settings | None = None, oracle: OracleService | None = 
     def auth_session(claims: SessionClaims = Depends(require_session)):
         return AuthUser(id=claims.user_id, email=claims.email, roles=list(claims.roles))
 
+    @app.post("/api/v1/auth/token", response_model=TokenResponse)
+    def issue_access_token(claims: SessionClaims = Depends(require_session)):
+        return TokenResponse(
+            access_token=auth_service.issue_pat(claims.user_id),
+            expires_in=auth_service.pat_ttl_seconds,
+        )
+
+    @app.get("/api/v1/wisdom/random")
+    def wisdom_random(_claims: AccessTokenClaims = Depends(require_access_token)):
+        quotes = snapshots.wisdom()
+        if not quotes:
+            raise HTTPException(status_code=404, detail="No public wisdom available")
+        return random.choice(quotes)
+
     @app.get("/api/v1/graph")
     def graph():
         return Response(content=snapshots.graph_bytes(), media_type="application/json")
@@ -87,6 +116,49 @@ def create_app(settings: Settings | None = None, oracle: OracleService | None = 
         if not remove_favorite(claims.user_id, quote_id):
             raise HTTPException(status_code=404, detail="Favorite not found")
         return Response(status_code=204)
+
+    @app.post("/api/v1/proposals", status_code=201, response_model=ProposalCreated)
+    def create_user_proposal(
+        payload: ProposalRequest,
+        claims: SessionClaims = Depends(require_session),
+    ):
+        # `origin` y el autor los fija el servidor: el cliente no puede declarar otra procedencia.
+        candidate = {
+            "text": payload.text,
+            "section": payload.section,
+            "level": payload.level,
+            "origin": "human",
+            "lang": payload.lang,
+        }
+        if payload.source is not None:
+            candidate["source"] = payload.source
+        if payload.tags:
+            candidate["tags"] = payload.tags
+        if payload.teaches is not None:
+            candidate["teaches"] = payload.teaches
+
+        try:
+            proposal = create_proposal(
+                candidate_content=candidate,
+                proposer_kind="human",
+                proposer_id=claims.user_id,
+                generation_method="api-proposal-create",
+            )
+            ProposalStore(settings.proposal_dir).save(proposal)
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+        except OSError as exc:
+            logger.exception("Unable to persist proposal")
+            raise HTTPException(status_code=500, detail="Unable to save proposal") from exc
+
+        return ProposalCreated(proposal_id=proposal.proposal_id, status=proposal.status.value)
+
+    # La cola solo la ve quien revisa: el rol se comprueba en el servidor, no ocultando la vista.
+    @app.get("/api/v1/proposals")
+    def list_proposals(claims: SessionClaims = Depends(require_session)):
+        if not {"reviewer", "instructor"}.intersection(claims.roles):
+            raise HTTPException(status_code=403, detail="Reviewer role required")
+        return [proposal.to_dict() for proposal in ProposalStore(settings.proposal_dir).list()]
 
     return app
 
