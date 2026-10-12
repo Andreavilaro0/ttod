@@ -8,10 +8,22 @@ const { fetchWisdom } = vi.hoisted(() => ({ fetchWisdom: vi.fn() }));
 
 // Only fetchWisdom is faked: frequencies(), labels and isLocale stay real, so these tests exercise
 // the reuse the task is actually about instead of a parallel reimplementation.
-vi.mock('../content/wisdom', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('../content/wisdom')>()),
-  fetchWisdom,
-}));
+vi.mock('../content/wisdom', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('../content/wisdom')>();
+  // loadWisdom from importOriginal closes over the real fetchWisdom; re-wrap so the
+  // hoisted mock is what the facet routes exercise.
+  return {
+    ...mod,
+    fetchWisdom,
+    loadWisdom: async (locale: 'en' | 'es') => {
+      try {
+        return { entries: await fetchWisdom(locale), failed: false };
+      } catch {
+        return { entries: [], failed: true };
+      }
+    },
+  };
+});
 
 import LevelRoute from '../pages/[locale]/wisdom/levels/[level].astro';
 import SectionRoute from '../pages/[locale]/wisdom/sections/[section].astro';

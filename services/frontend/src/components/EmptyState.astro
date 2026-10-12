@@ -1,8 +1,13 @@
 ---
-interface Props { title: string; message: string; action?: { label: string; href: string } }
-const { title, message, action } = Astro.props;
+interface Props {
+  title: string;
+  message: string;
+  action?: { label: string; href: string };
+  variant?: 'empty' | 'error';
+}
+const { title, message, action, variant = 'empty' } = Astro.props;
 ---
-<div class="ttod-empty">
+<div class="ttod-empty" role={variant === 'error' ? 'alert' : undefined}>
   <h2>{title}</h2>
   <p>{message}</p>
   {action && <p><a href={action.href}>{action.label}</a></p>}
