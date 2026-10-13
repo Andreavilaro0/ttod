@@ -23,8 +23,9 @@
       && document.activeElement.matches('[data-node-id]')
       ? document.activeElement
       : null;
+    const nextFiltered = filterGraph(allNodes, allEdges, tag);
     activeTag = tag;
-    if (selected && !filtered.nodes.some((node) => node.id === selected?.id)) selected = null;
+    if (selected && !nextFiltered.nodes.some((node) => node.id === selected.id)) selected = null;
     await tick();
     if (focusedNode && !focusedNode.isConnected) tagFilter?.focus();
   }
@@ -91,7 +92,7 @@
   }
 
   onMount(() => {
-    syncFromUrl();
+    void applyTag(selectedTag(window.location.search));
     window.addEventListener('popstate', syncFromUrl);
     void (async () => {
       try {

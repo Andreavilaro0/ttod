@@ -174,6 +174,26 @@ test('fetches, lays out, renders, and selects graph nodes accessibly', async ({ 
 		await expect(page.getByRole('group', { name: 'Knowledge graph with 2 nodes and 1 edges' })).toBeVisible();
 	});
 
+	test('initializes the tag filter from the URL', async ({ page }) => {
+		await page.route('**/api/v1/graph', (route) => route.fulfill({
+			status: 200,
+			contentType: 'application/json',
+			body: JSON.stringify({ nodes: graphNodes, edges: graphEdges })
+		}));
+		await page.route('**/api/v1/wisdom/sample', (route) => route.fulfill({
+			status: 200,
+			contentType: 'application/json',
+			body: JSON.stringify(wisdom.map((entry) => ({
+				...entry,
+				tags: entry.id.startsWith('arch-') ? ['architecture'] : ['wisdom']
+			})))
+		}));
+
+		await page.goto('/en/graph?tag=architecture');
+		await expect(page.getByLabel('Filter by tag')).toHaveValue('architecture');
+		await expect(page.getByRole('group', { name: 'Knowledge graph with 2 nodes and 1 edges' })).toBeVisible();
+	});
+
 test('shows loading and empty states while a successful graph response is pending', async ({ page }) => {
 	let releaseGraphResponse!: () => void;
 	const graphResponsePending = new Promise<void>((resolve) => {
