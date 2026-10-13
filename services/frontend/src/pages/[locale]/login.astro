@@ -17,6 +17,9 @@ if (Astro.request.method === 'POST') {
 
   if (typeof email !== 'string' || typeof password !== 'string') {
     loginError = 'credentials';
+  } else if (email.trim() === '' || password === '') {
+    // Un campo vacío nunca es una credencial válida: se rechaza aquí, sin llamar al backend.
+    loginError = 'credentials';
   } else {
     // La contraseña solo viaja al backend, que la verifica con bcrypt; esta página no compara nada.
     const login = await loginWithBackend(email, password);
