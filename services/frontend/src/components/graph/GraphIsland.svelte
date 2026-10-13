@@ -45,7 +45,17 @@
     selected = node;
   }
 
-  const arrowSteps: Record<string, number> = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+  const arrowDirections = {
+    ArrowRight: { x: 1, y: 0 },
+    ArrowDown: { x: 0, y: 1 },
+    ArrowLeft: { x: -1, y: 0 },
+    ArrowUp: { x: 0, y: -1 }
+  } as const;
+
+  function focusNode(id: string) {
+    const target = graphRoot?.querySelector<SVGCircleElement>(`[data-node-id="${CSS.escape(id)}"]`);
+    target?.focus();
+  }
 
   function handleNodeKeydown(event: KeyboardEvent, node: PositionedNode) {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -53,13 +63,31 @@
       selectNode(node);
       return;
     }
-    const step = arrowSteps[event.key];
-    if (step === undefined) return;
+    const direction = arrowDirections[event.key as keyof typeof arrowDirections];
+    if (!direction) return;
     event.preventDefault();
     const currentIndex = nodes.findIndex((candidate) => candidate.id === node.id);
     if (currentIndex === -1) return;
-    const nextNode = nodes[(currentIndex + step + nodes.length) % nodes.length];
-    (graphRoot?.querySelector(`[data-node-id="${CSS.escape(nextNode.id)}"]`) as SVGCircleElement | null)?.focus();
+    const currentNode = nodes[currentIndex];
+    const candidates = nodes.filter((candidate) => candidate.id !== node.id).map((candidate) => {
+      const deltaX = candidate.x - currentNode.x;
+      const deltaY = candidate.y - currentNode.y;
+      return {
+        candidate,
+        primary: deltaX * direction.x + deltaY * direction.y,
+        perpendicular: Math.abs(deltaX * direction.y - deltaY * direction.x),
+        distance: deltaX ** 2 + deltaY ** 2
+      };
+    });
+    const directed = candidates.filter(({ primary }) => primary > 0);
+    const ranked = directed.length > 0 ? directed : candidates;
+    ranked.sort((a, b) => {
+      const distanceDifference = directed.length > 0
+        ? a.distance - b.distance
+        : a.perpendicular - b.perpendicular;
+      return distanceDifference || a.distance - b.distance || a.candidate.id.localeCompare(b.candidate.id);
+    });
+    if (ranked[0]) focusNode(ranked[0].candidate.id);
   }
 
   onMount(() => {
@@ -104,7 +132,7 @@
   {#if loading}<p>Loading live graph…</p>{:else if error}<p role="alert">{error}</p>{:else if nodes.length === 0}<p>{activeTag ? 'No nodes carry this tag.' : 'No graph nodes are available.'}</p>{:else}
     <svg bind:this={graphRoot} viewBox="0 0 960 620" role="group" aria-label={`Knowledge graph with ${nodes.length} nodes and ${edges.length} edges`}>
       <g class="edges">{#each edges as edge}<line x1={positioned.get(edge.source)?.x} y1={positioned.get(edge.source)?.y} x2={positioned.get(edge.target)?.x} y2={positioned.get(edge.target)?.y}><title>{edge.rel}</title></line>{/each}</g>
-      <g>{#each nodes as node (node.id)}<circle data-node-id={node.id} class:deprecated={node.status === 'deprecated'} class={`node ${node.origin}`} cx={node.x} cy={node.y} r="5" tabindex="0" role="button" aria-label={`${node.id}: ${node.text}${node.tags[0] ? `, tag: ${node.tags[0]}` : ''}`} onclick={() => selectNode(node)} onkeydown={(event) => handleNodeKeydown(event, node)}><title>{node.id} · {node.origin} · {node.text}</title></circle>{/each}</g>
+      <g>{#each nodes as node (node.id)}<circle data-node-id={node.id} class:deprecated={node.status === 'deprecated'} class={`node ${node.origin}`} cx={node.x} cy={node.y} r="5" tabindex="0" role="button" aria-label={`${node.id}: ${node.text}${node.tags.length ? `, tags: ${node.tags.join(', ')}` : ''}`} onclick={() => selectNode(node)} onkeydown={(event) => handleNodeKeydown(event, node)}><title>{node.id} · {node.origin} · {node.text}</title></circle>{/each}</g>
     </svg>
   {/if}
   <aside aria-labelledby="graph-node-details-title" aria-live="polite" aria-atomic="true">
