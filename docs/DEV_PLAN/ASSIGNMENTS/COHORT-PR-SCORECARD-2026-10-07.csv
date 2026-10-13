@@ -1,21 +1,40 @@
-group,pr,task,branch,author,url,score_contract_25,score_acceptance_25,score_tests_20,score_a11y_10,score_ci_10,score_process_10,score_total_100,ci_status,mergeable,review_decision,ai_log_present,triage_notes,merge_wave
-E5,31,accounts-task1,task/1-ssr-auth,alexxblaro16,https://github.com/ruvebal/ttod/pull/31,,,,,,, ,SUCCESS,MERGEABLE,CHANGES_REQUESTED,no,AI log missing; SSR guard focus,3-accounts
-E5,32,accounts-task2,task/2-personal-library,alexxblaro16,https://github.com/ruvebal/ttod/pull/32,,,,,,, ,SUCCESS,UNKNOWN,CHANGES_REQUESTED,no,AI log missing; mergeable UNKNOWN,3-accounts
-E5,33,accounts-task3,task/3-proposal-endpoint,alexxblaro16,https://github.com/ruvebal/ttod/pull/33,,,,,,, ,SUCCESS,MERGEABLE,CHANGES_REQUESTED,no,Verify 201+proposal id; dismiss TS-in-Python bot claim,3-accounts
-E5,34,accounts-task4,task/4-review-pipeline,alexxblaro16,https://github.com/ruvebal/ttod/pull/34,,,,,,, ,SUCCESS,MERGEABLE,CHANGES_REQUESTED,no,Verify requireRole reviewer; dismiss favorites scope-creep,3-accounts
-E5,35,accounts-task5,task/5-public-pat,alexxblaro16,https://github.com/ruvebal/ttod/pull/35,,,,,,, ,SUCCESS,MERGEABLE,CHANGES_REQUESTED,no,Cookie must 401 on wisdom/random,3-accounts
-E4,37,pwa-task1,main,PRNovoa,https://github.com/ruvebal/ttod/pull/37,,,,,,, ,SUCCESS,CLOSED,none,no,CLOSED superseded by #51,4-pwa
-E4,51,pwa-task1,pwa-task1-service-worker,PRNovoa,https://github.com/ruvebal/ttod/pull/51,24,24,20,10,10,9,97,SUCCESS,MERGEABLE,REVIEW_REQUIRED,yes,Replaces #37; tip v2 OK with E2E; AI log filled,4-pwa
-E4,46,pwa-task2,pwa-task2-offline-oracle,PRNovoa,https://github.com/ruvebal/ttod/pull/46,,,,,,, ,SUCCESS,MERGEABLE,REVIEW_REQUIRED,no,Verify oracle shells cached offline; drop .aws,4-pwa
-E4,47,pwa-task3,pwa-task3-cache-policies,PRNovoa,https://github.com/ruvebal/ttod/pull/47,,,,,,, ,SUCCESS,MERGEABLE,REVIEW_REQUIRED,no,Verify cache-first static / network-first API; drop .aws,4-pwa
-E4,49,pwa-task4,pwa-task4-offline-queue,PRNovoa,https://github.com/ruvebal/ttod/pull/49,,,,,,, ,SUCCESS,MERGEABLE,REVIEW_REQUIRED,no,Verify flush-on-online; rebase after Oracle; drop .aws,4-pwa
-E4,50,pwa-task5,pwa-task5-install-quality,PRNovoa,https://github.com/ruvebal/ttod/pull/50,,,,,,, ,SUCCESS,MERGEABLE,REVIEW_REQUIRED,no,Canonical manifest; install evidence,4-pwa
-E3,44,oracle-task1,oracle-task1-streamed-response-rendering,Andreavilaro0,https://github.com/ruvebal/ttod/pull/44,,,,,,, ,UNREPORTED,MERGEABLE,REVIEW_REQUIRED,no,Strengthen chunk assertions; first in Oracle stack,2-oracle
-E3,45,oracle-task2,oracle-task2-live-region-announcement,Andreavilaro0,https://github.com/ruvebal/ttod/pull/45,,,,,,, ,UNREPORTED,MERGEABLE,REVIEW_REQUIRED,no,Describe-name NIT only,2-oracle
-E3,38,oracle-task3,oracle-task3-grounded-creative-disclosure,Andreavilaro0,https://github.com/ruvebal/ttod/pull/38,,,,,,, ,UNREPORTED,MERGEABLE,REVIEW_REQUIRED,no,Dismiss prior-task test removal,2-oracle
-E3,39,oracle-task4,oracle-task4-session-history,Andreavilaro0,https://github.com/ruvebal/ttod/pull/39,,,,,,, ,UNREPORTED,MERGEABLE,REVIEW_REQUIRED,no,Verify sessionHistory wire format,2-oracle
-E3,40,oracle-task5,oracle-task5-preparing-state,Andreavilaro0,https://github.com/ruvebal/ttod/pull/40,,,,,,, ,UNREPORTED,MERGEABLE,REVIEW_REQUIRED,no,Preparing vs immediate error,2-oracle
-E3,41,oracle-task6,oracle-task6-recovery-error-state,Andreavilaro0,https://github.com/ruvebal/ttod/pull/41,,,,,,, ,UNREPORTED,MERGEABLE,REVIEW_REQUIRED,no,Assert unavailable user-facing copy,2-oracle
-E3,42,oracle-task7,oracle-task7-unit-component-tests,Andreavilaro0,https://github.com/ruvebal/ttod/pull/42,,,,,,, ,UNREPORTED,MERGEABLE,REVIEW_REQUIRED,no,Suite retention in-brief for Task 7,2-oracle
-E2,48,graph-task1,graph-task1-fetch-from-api,gpfc-git,https://github.com/ruvebal/ttod/pull/48,25,24,20,10,10,9,98,SUCCESS,MERGEABLE,APPROVED,yes,APPROVED 2026-10-08; activeTag removal in-brief; update branch if behind,1-independent
-E1,43,docs-plan-bugbot-amend,docs/group-1-plan-amendments,gontugithub,https://github.com/ruvebal/ttod/pull/43,22,24,20,10,10,3,89,SUCCESS,MERGED,none,no,MERGED 2026-10-08; closes #28 Bugbot findings; empty AI log,1-independent
+group,pr,task,branch,author,url,score_contract_25,score_acceptance_25,score_tests_20,score_a11y_10,score_ci_10,score_process_10,score_total_100,ci_status,mergeable,merge_state,review_decision,state,triage_notes,merge_wave
+E1,43,docs-plan-bugbot,docs/group-1-plan-amendments,gontugithub,https://github.com/ruvebal/ttod/pull/43,22,24,20,10,10,3,89,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-08; empty AI log; docs amend,1-content
+E1,61,content-task1,content-task1-facet-routes,gontugithub,https://github.com/ruvebal/ttod/pull/61,24,24,20,10,10,8,96,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-12 sibling facets + empty-tag 404,1-content
+E1,62,content-task2,content-task2-breadcrumbs,gontugithub,https://github.com/ruvebal/ttod/pull/62,24,25,20,10,10,9,98,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-12 Breadcrumbs + copy.notFound,1-content
+E1,63,content-task3,content-task3-empty-error-states,gontugithub,https://github.com/ruvebal/ttod/pull/63,25,25,20,9,10,9,98,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-11 HOLD skim,1-content
+E1,64,content-task4,content-task4-propose-form,gontugithub,https://github.com/ruvebal/ttod/pull/64,25,25,20,10,10,9,99,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-11 HOLD skim,1-content
+E1,65,content-task5,content-task5-provenance,gontugithub,https://github.com/ruvebal/ttod/pull/65,,,,,,,,,—,—,CHANGES_REQUESTED,OPEN,AMEND provenance on all surfaces,1-content
+E1,67,content-task6,content-task6-content-tests,gontugithub,https://github.com/ruvebal/ttod/pull/67,,,,,,,,,—,—,CHANGES_REQUESTED,OPEN,AMEND propose-form component test,1-content
+E1,68,content-task9,content-task9-design-decision,gontugithub,https://github.com/ruvebal/ttod/pull/68,,,,,,,,,—,—,CHANGES_REQUESTED,OPEN,AMEND design-decision tip alignment,1-content
+E2,48,graph-task1,graph-task1-fetch-from-api,gpfc-git,https://github.com/ruvebal/ttod/pull/48,25,24,20,10,10,9,98,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-08,2-graph
+E2,52,graph-task2,graph-task2-accessible-node-selection,gpfc-git,https://github.com/ruvebal/ttod/pull/52,,,,,,,,,—,—,CHANGES_REQUESTED,OPEN,AMEND keyboard focus,2-graph
+E2,55,graph-task3,graph-task3-task-filter-interaction,gpfc-git,https://github.com/ruvebal/ttod/pull/55,,,,,,,,,—,—,CHANGES_REQUESTED,OPEN,AMEND selection across filter,2-graph
+E2,71,graph-task4,graph-task4-url-state-selection,gpfc-git,https://github.com/ruvebal/ttod/pull/71,,,,,,,,,—,—,CHANGES_REQUESTED,OPEN,AMEND CI FAIL + URL sync,2-graph
+E3,44,oracle-task1,oracle-task1-streamed-response-rendering,Andreavilaro0,https://github.com/ruvebal/ttod/pull/44,24,24,18,9,10,8,93,—,—,—,—,CLOSED,CLOSED 2026-10-13 superseded by #42 cumulative,3-oracle
+E3,45,oracle-task2,oracle-task2-live-region-announcement,Andreavilaro0,https://github.com/ruvebal/ttod/pull/45,24,24,18,10,10,8,94,—,—,—,—,CLOSED,CLOSED 2026-10-13 superseded by #42,3-oracle
+E3,38,oracle-task3,oracle-task3-grounded-creative-disclosure,Andreavilaro0,https://github.com/ruvebal/ttod/pull/38,24,24,18,10,10,8,94,—,—,—,—,CLOSED,CLOSED 2026-10-13 superseded by #42,3-oracle
+E3,39,oracle-task4,oracle-task4-session-history,Andreavilaro0,https://github.com/ruvebal/ttod/pull/39,24,24,18,9,10,8,93,—,—,—,—,CLOSED,CLOSED 2026-10-13 superseded by #42,3-oracle
+E3,40,oracle-task5,oracle-task5-preparing-state,Andreavilaro0,https://github.com/ruvebal/ttod/pull/40,24,24,18,9,10,8,93,—,—,—,—,CLOSED,CLOSED 2026-10-13 superseded by #42,3-oracle
+E3,41,oracle-task6,oracle-task6-recovery-error-state,Andreavilaro0,https://github.com/ruvebal/ttod/pull/41,24,24,18,9,10,8,93,—,—,—,—,CLOSED,CLOSED 2026-10-13 superseded by #42,3-oracle
+E3,42,oracle-task7,oracle-task7-unit-component-tests,Andreavilaro0,https://github.com/ruvebal/ttod/pull/42,25,25,20,10,10,10,100,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-11 cumulative Tasks 1-7,3-oracle
+E4,37,pwa-task1-bad,main,PRNovoa,https://github.com/ruvebal/ttod/pull/37,,,,,,,,,—,—,—,CLOSED,superseded by #51,4-pwa
+E4,51,pwa-task1,pwa-task1-service-worker,PRNovoa,https://github.com/ruvebal/ttod/pull/51,24,24,20,10,10,9,97,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-08,4-pwa
+E4,46,pwa-task2,pwa-task2-offline-oracle,PRNovoa,https://github.com/ruvebal/ttod/pull/46,24,24,18,10,10,9,95,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-11,4-pwa
+E4,47,pwa-task3,pwa-task3-cache-policies,PRNovoa,https://github.com/ruvebal/ttod/pull/47,24,24,18,10,10,9,95,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-11,4-pwa
+E4,49,pwa-task4,pwa-task4-offline-queue,PRNovoa,https://github.com/ruvebal/ttod/pull/49,25,25,18,9,10,9,96,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-12,4-pwa
+E4,50,pwa-task5,pwa-task5-install-quality,PRNovoa,https://github.com/ruvebal/ttod/pull/50,24,24,16,10,10,10,94,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-12,4-pwa
+E4,60,pwa-task6,pwa-task6-performance,PRNovoa,https://github.com/ruvebal/ttod/pull/60,25,25,18,10,10,10,98,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-11,4-pwa
+E4,69,pwa-task7,pwa-task7-offline-tests,PRNovoa,https://github.com/ruvebal/ttod/pull/69,24,24,20,10,10,9,97,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-12,4-pwa
+E5,31,accounts-task1-old,task/1-ssr-auth,alexxblaro16,https://github.com/ruvebal/ttod/pull/31,,,,,,,,,—,—,—,CLOSED,replaced by #53,5-accounts-closed
+E5,32,accounts-task2-old,task/2-personal-library,alexxblaro16,https://github.com/ruvebal/ttod/pull/32,,,,,,,,,—,—,—,CLOSED,replaced by #58,5-accounts-closed
+E5,33,accounts-task3-old,task/3-proposal-endpoint,alexxblaro16,https://github.com/ruvebal/ttod/pull/33,,,,,,,,,—,—,—,CLOSED,replaced by #57,5-accounts-closed
+E5,34,accounts-task4-old,task/4-review-pipeline,alexxblaro16,https://github.com/ruvebal/ttod/pull/34,,,,,,,,,—,—,—,CLOSED,replaced by #72,5-accounts-closed
+E5,35,accounts-task5-old,task/5-public-pat,alexxblaro16,https://github.com/ruvebal/ttod/pull/35,,,,,,,,,—,—,—,CLOSED,replaced by #56,5-accounts-closed
+E5,53,accounts-task1,accounts-task1-ssr-auth,alexxblaro16,https://github.com/ruvebal/ttod/pull/53,24,24,16,8,10,9,91,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-13 empty login + requireUser,5-accounts
+E5,58,accounts-task2,accounts-task2-personal-library,Gonsiii11,https://github.com/ruvebal/ttod/pull/58,24,24,16,9,10,9,92,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-13 FavoriteButton on detail,5-accounts
+E5,57,accounts-task3,accounts-task3-proposal-endpoint,alexxblaro16,https://github.com/ruvebal/ttod/pull/57,25,24,16,8,10,9,92,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-13 origin/author + ProposalStore,5-accounts
+E5,72,accounts-task4,accounts-task4-review-pipeline,alexxblaro16,https://github.com/ruvebal/ttod/pull/72,24,24,14,8,10,9,89,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-13 reviewer role gate,5-accounts
+E5,56,accounts-task5,accounts-task5-public-pat,alexxblaro16,https://github.com/ruvebal/ttod/pull/56,25,24,18,8,10,9,94,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-13 Bearer PAT on /wisdom/random,5-accounts
+E5,73,accounts-task6,accounts-task6-api-guide,alexxblaro16,https://github.com/ruvebal/ttod/pull/73,24,24,16,8,10,9,91,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-11,5-accounts
+E5,59,accounts-task7,accounts-task7-auth-library-api-tests,alexxblaro16,https://github.com/ruvebal/ttod/pull/59,24,24,20,8,10,9,95,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-11,5-accounts
