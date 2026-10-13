@@ -38,6 +38,8 @@ function localeOf(request: Request): 'en' | 'es' {
 }
 
 export async function loginWithBackend(email: string, password: string): Promise<LoginResult> {
+  if (email.trim() === '' || password === '') return { ok: false, reason: 'credentials' };
+
   try {
     const response = await fetch(`${BACKEND_URL}/api/v1/auth/login`, {
       method: 'POST',
