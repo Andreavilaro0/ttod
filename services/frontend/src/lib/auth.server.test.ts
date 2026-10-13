@@ -119,6 +119,16 @@ describe('login against the backend', () => {
     });
   });
 
+  it('rejects an empty email or password without calling the backend', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch');
+
+    await expect(loginWithBackend('', 'a-password')).resolves.toEqual({ ok: false, reason: 'credentials' });
+    await expect(loginWithBackend('   ', 'a-password')).resolves.toEqual({ ok: false, reason: 'credentials' });
+    await expect(loginWithBackend('admin@ttod.local', '')).resolves.toEqual({ ok: false, reason: 'credentials' });
+
+    expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
   it('reports a service failure for an unexpected body or an unreachable backend', async () => {
     vi.spyOn(console, 'error').mockImplementation(() => undefined);
     vi.spyOn(globalThis, 'fetch')
