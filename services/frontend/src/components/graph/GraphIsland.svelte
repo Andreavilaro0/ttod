@@ -35,22 +35,20 @@
 
   function setTag(tag: string) {
     const keepNode = selected && filterGraph(allNodes, allEdges, tag).nodes.some((node) => node.id === selected?.id);
-    writeUrlState({ tag, node: keepNode ? selected?.id : '' });
-    void applyTag(tag);
+    void syncFromUrl({ tag, node: keepNode ? selected?.id ?? '' : '' }, 'push');
   }
 
-  async function syncFromUrl() {
+  async function syncFromUrl(requested = parseUrlState(window.location.search), mode: 'push' | 'replace' = 'replace') {
     if (!loaded) return;
-    const requested = parseUrlState(window.location.search);
     const next = resolveUrlState(requested, tags, (tag) => filterGraph(allNodes, allEdges, tag).nodes.map((node) => node.id));
-    if (next.tag !== requested.tag || next.node !== requested.node) writeUrlState(next, 'replace');
+    if (next.tag !== requested.tag || next.node !== requested.node || mode === 'push') writeUrlState(next, mode);
     await applyTag(next.tag);
     selected = next.node ? positioned.get(next.node) ?? null : null;
   }
 
   function selectNode(node: PositionedNode) {
-    selected = node;
-    writeUrlState({ node: node.id });
+    const current = parseUrlState(window.location.search);
+    void syncFromUrl({ ...current, node: node.id }, 'push');
   }
 
   const arrowDirections = {

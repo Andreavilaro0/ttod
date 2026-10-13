@@ -8,11 +8,15 @@ const graphNodes: GraphNode[] = [
 	{ id: 'wis-001', section: 'wisdom', origin: 'blackbox', status: 'active', text: 'Question the obvious.', lang: 'en' }
 ];
 const wisdom: WisdomEntry[] = graphNodes.map((node) => ({
-	...node,
+	id: node.id,
+	section: node.section,
 	level: 'beginner',
+	text: node.text,
 	teaches: '',
 	tags: [node.section],
 	related: [],
+	origin: node.origin,
+	lang: node.lang,
 	rights: { license: 'CC-BY-NC-SA-4.0' }
 }));
 const graphEdges: GraphLink[] = [
