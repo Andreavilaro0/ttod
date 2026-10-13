@@ -26,6 +26,7 @@ E4,49,pwa-task4,pwa-task4-offline-queue,PRNovoa,https://github.com/ruvebal/ttod/
 E4,50,pwa-task5,pwa-task5-install-quality,PRNovoa,https://github.com/ruvebal/ttod/pull/50,24,24,16,10,10,10,94,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-12,4-pwa
 E4,60,pwa-task6,pwa-task6-performance,PRNovoa,https://github.com/ruvebal/ttod/pull/60,25,25,18,10,10,10,98,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-11,4-pwa
 E4,69,pwa-task7,pwa-task7-offline-tests,PRNovoa,https://github.com/ruvebal/ttod/pull/69,24,24,20,10,10,9,97,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-12,4-pwa
+E4,74,docs-pwa-ai-use,docs/team-4-ai-use,PRNovoa,https://github.com/ruvebal/ttod/pull/74,25,24,16,10,10,10,95,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-13 uso-ia-team-4.md AI-use memo,4-pwa
 E5,31,accounts-task1-old,task/1-ssr-auth,alexxblaro16,https://github.com/ruvebal/ttod/pull/31,,,,,,,,,—,—,—,CLOSED,replaced by #53,5-accounts-closed
 E5,32,accounts-task2-old,task/2-personal-library,alexxblaro16,https://github.com/ruvebal/ttod/pull/32,,,,,,,,,—,—,—,CLOSED,replaced by #58,5-accounts-closed
 E5,33,accounts-task3-old,task/3-proposal-endpoint,alexxblaro16,https://github.com/ruvebal/ttod/pull/33,,,,,,,,,—,—,—,CLOSED,replaced by #57,5-accounts-closed

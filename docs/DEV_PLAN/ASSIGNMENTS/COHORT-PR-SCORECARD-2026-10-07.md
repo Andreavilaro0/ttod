@@ -1,4 +1,4 @@
-# Cohort PR scorecard — updated 2026-10-13 (pm)
+# Cohort PR scorecard — updated 2026-10-13 (evening)
 
 **Audience:** instructor only (not published under `docs/public/`).
 **Rubric:** §5 — C25 · A25 · T20 · X10 · CI10 · P10 = 100.
@@ -6,6 +6,7 @@
 
 **Snapshot:** 6 student PRs open (+ maintainer #9).  
 **Complete seams:** PWA · Accounts · **Oracle** (Tasks 1–7 via cumulative **#42**; leftover per-task PRs closed 2026-10-13).  
+**Post-seam:** PWA **#74** AI-use memo merged 2026-10-13.  
 **Still open:** Content #65 → #67 → #68 · Graph #52 → #55 → #71.
 
 ---
@@ -17,7 +18,7 @@
 | E1 | Content | `gontugithub` | #61✓→#62✓→#63✓→#64✓→**#65**→**#67**→**#68** (#43 merged) |
 | E2 | Graph | `gpfc-git` | #52→#55→#71 (#48 merged) |
 | E3 | Oracle | `Andreavilaro0` / fork `nbfrodri/ttod_team3` | **complete** — #42 cumulative; #44/#45/#38–#41 closed superseded |
-| E4 | PWA | `PRNovoa` | **complete** |
+| E4 | PWA | `PRNovoa` | **complete** (+ #74 AI-use memo) |
 | E5 | Accounts | `alexxblaro16` / `Gonsiii11` on #58 | **complete** |
 
 ✓ = already **MERGED**.
@@ -55,6 +56,7 @@
 | E4 | [#50](https://github.com/ruvebal/ttod/pull/50) **MERGED** 2026-10-12 | pwa-task5 · `pwa-task5-install-quality` | 24 | 24 | 16 | 10 | 10 | 10 | **94** | MERGED; Brave install evidence | — |
 | E4 | [#60](https://github.com/ruvebal/ttod/pull/60) **MERGED** 2026-10-11 | pwa-task6 · `pwa-task6-performance` | 25 | 25 | 18 | 10 | 10 | 10 | **98** | MERGED; LCP budget | — |
 | E4 | [#69](https://github.com/ruvebal/ttod/pull/69) **MERGED** 2026-10-12 | pwa-task7 · `pwa-task7-offline-tests` | 24 | 24 | 20 | 10 | 10 | 9 | **97** | MERGED; db.test + Page.test | — |
+| E4 | [#74](https://github.com/ruvebal/ttod/pull/74) **MERGED** 2026-10-13 | docs(pwa) · `docs/team-4-ai-use` | 25 | 24 | 16 | 10 | 10 | 10 | **95** | MERGED; `docs/uso-ia-team-4.md` AI-use memo (rejected `tsc` drop) | — |
 | E5 | [#31](https://github.com/ruvebal/ttod/pull/31)–[#35](https://github.com/ruvebal/ttod/pull/35) **CLOSED** | accounts-task1–5 old | — | — | — | — | — | — | — | CLOSED; replaced by #53/#58/#57/#72/#56 | — |
 | E5 | [#53](https://github.com/ruvebal/ttod/pull/53) **MERGED** 2026-10-13 | accounts-task1 · `accounts-task1-ssr-auth` | 24 | 24 | 16 | 8 | 10 | 9 | **91** | MERGED; empty login reject + `requireUser` | — |
 | E5 | [#58](https://github.com/ruvebal/ttod/pull/58) **MERGED** 2026-10-13 | accounts-task2 · `accounts-task2-personal-library` | 24 | 24 | 16 | 9 | 10 | 9 | **92** | MERGED; FavoriteButton on detail only | — |
@@ -73,7 +75,7 @@
 | E1 Content | 5 | 96 | 98 | #61–#64 merged; #65/#67/#68 still open |
 | E2 Graph | 1 | 98 | 98 | stack still AMEND |
 | E3 Oracle | 7 | 94 | 93 | **seam complete** (#42 cumulative; #44–#41 closed superseded) |
-| E4 PWA | 7 | 96 | 96 | **seam complete** |
+| E4 PWA | 8 | 96 | 96 | **seam complete** (+ #74 memo) |
 | E5 Accounts | 7 | 92 | 92 | **seam complete** |
 
 ---
@@ -84,7 +86,7 @@
 2. **Graph:** #52 → #55 → #71  
 3. **Oracle:** done (#42)  
 4. **Accounts:** done  
-5. **PWA:** done  
+5. **PWA:** done (+ #74 AI-use memo)  
 
 Instructor Update branch / conflict resolve is merge hygiene — not a student reject reason.
 
@@ -98,4 +100,4 @@ Per-task PRs #44/#45/#38/#39/#40/#41 looked unmergeable (`DIRTY` / `CHANGES_REQU
 
 [`COHORT-PR-SCORECARD-2026-10-07.csv`](./COHORT-PR-SCORECARD-2026-10-07.csv) (rewritten same snapshot).
 
-_Updated: 2026-10-13 pm (Oracle cleanup + scorecard)._
+_Updated: 2026-10-13 evening (#74 PWA AI-use memo)._
