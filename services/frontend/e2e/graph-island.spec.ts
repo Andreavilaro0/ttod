@@ -12,7 +12,7 @@ const wisdom: WisdomEntry[] = graphNodes.map((node) => ({
 	...node,
 	level: 'beginner',
 	teaches: '',
-	tags: [`tag-${node.id}`],
+	tags: [`tag-${node.id}`, 'shared'],
 	related: [],
 	rights: { license: 'CC-BY-NC-SA-4.0' }
 }));
@@ -46,7 +46,7 @@ test('fetches, lays out, renders, and selects graph nodes accessibly', async ({ 
 	const nodeButtons = svg.getByRole('button');
 	await expect(nodeButtons).toHaveCount(expectedNodes.length);
 	for (const node of expectedNodes) {
-		const renderedNode = page.getByRole('button', { name: `${node.id}: ${node.text}` });
+		const renderedNode = page.getByRole('button', { name: `${node.id}: ${node.text}, tags: ${node.tags.join(', ')}` });
 		await expect(renderedNode).toHaveAttribute('tabindex', '0');
 		await expect(renderedNode).toHaveAttribute('cx', String(node.x));
 		await expect(renderedNode).toHaveAttribute('cy', String(node.y));
@@ -54,14 +54,21 @@ test('fetches, lays out, renders, and selects graph nodes accessibly', async ({ 
 
 	const details = page.getByRole('complementary', { name: 'Selected node' });
 	await expect(details).toHaveAttribute('aria-live', 'polite');
-	await page.getByRole('button', { name: 'arch-001: Keep boundaries clear.' }).click();
+	const firstNode = page.getByRole('button', { name: 'arch-001: Keep boundaries clear., tags: tag-arch-001, shared' });
+	await firstNode.click();
 	await expect(details).toContainText('Keep boundaries clear.');
+	await details.scrollIntoViewIfNeeded();
 	await expect(details).toBeInViewport();
-	await page.getByRole('button', { name: 'arch-002: Share pure functions.' }).press('Enter');
+	await firstNode.focus();
+	await firstNode.press('ArrowLeft');
+	await expect(page.getByRole('button', { name: 'arch-002: Share pure functions., tags: tag-arch-002, shared' })).toBeFocused();
+	await page.getByRole('button', { name: 'arch-002: Share pure functions., tags: tag-arch-002, shared' }).press('Enter');
 	await expect(details).toContainText('Share pure functions.');
+	await details.scrollIntoViewIfNeeded();
 	await expect(details).toBeInViewport();
-	await page.getByRole('button', { name: 'wis-001: Question the obvious.' }).press('Space');
+	await page.getByRole('button', { name: 'wis-001: Question the obvious., tags: tag-wis-001, shared' }).press('Space');
 	await expect(details).toContainText('Question the obvious.');
+	await details.scrollIntoViewIfNeeded();
 	await expect(details).toBeInViewport();
 });
 
