@@ -8,9 +8,11 @@ E1,65,content-task5,content-task5-provenance,gontugithub,https://github.com/ruve
 E1,67,content-task6,content-task6-content-tests,gontugithub,https://github.com/ruvebal/ttod/pull/67,,,,,,,,,—,—,CHANGES_REQUESTED,OPEN,AMEND propose-form component test,1-content
 E1,68,content-task9,content-task9-design-decision,gontugithub,https://github.com/ruvebal/ttod/pull/68,,,,,,,,,—,—,CHANGES_REQUESTED,OPEN,AMEND design-decision tip alignment,1-content
 E2,48,graph-task1,graph-task1-fetch-from-api,gpfc-git,https://github.com/ruvebal/ttod/pull/48,25,24,20,10,10,9,98,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-08,2-graph
-E2,52,graph-task2,graph-task2-accessible-node-selection,gpfc-git,https://github.com/ruvebal/ttod/pull/52,,,,,,,,,—,—,CHANGES_REQUESTED,OPEN,AMEND keyboard focus,2-graph
-E2,55,graph-task3,graph-task3-task-filter-interaction,gpfc-git,https://github.com/ruvebal/ttod/pull/55,,,,,,,,,—,—,CHANGES_REQUESTED,OPEN,AMEND selection across filter,2-graph
-E2,71,graph-task4,graph-task4-url-state-selection,gpfc-git,https://github.com/ruvebal/ttod/pull/71,,,,,,,,,—,—,CHANGES_REQUESTED,OPEN,AMEND CI FAIL + URL sync,2-graph
+E2,52,graph-task2,graph-task2-accessible-node-selection,gpfc-git,https://github.com/ruvebal/ttod/pull/52,24,24,18,10,10,9,95,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-14 spatial arrow focus,2-graph
+E2,55,graph-task3,graph-task3-task-filter-interaction,gpfc-git,https://github.com/ruvebal/ttod/pull/55,24,25,18,9,10,9,95,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-14 preserve selection across filter,2-graph
+E2,71,graph-task4,graph-task4-url-state-selection,gpfc-git,https://github.com/ruvebal/ttod/pull/71,25,24,20,9,10,9,97,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-14 urlState + deep-link e2e,2-graph
+E2,75,graph-task5,graph-task5-layout-and-performance,gpfc-git,https://github.com/ruvebal/ttod/pull/75,24,22,18,10,10,9,93,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-14 O(n) grouping + scale e2e,2-graph
+E2,76,graph-task6,graph-task6-keyboard-operabililty,gpfc-git,https://github.com/ruvebal/ttod/pull/76,24,24,18,10,10,9,95,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-14 focusable + keyboard e2e,2-graph
 E3,44,oracle-task1,oracle-task1-streamed-response-rendering,Andreavilaro0,https://github.com/ruvebal/ttod/pull/44,24,24,18,9,10,8,93,—,—,—,—,CLOSED,CLOSED 2026-10-13 superseded by #42 cumulative,3-oracle
 E3,45,oracle-task2,oracle-task2-live-region-announcement,Andreavilaro0,https://github.com/ruvebal/ttod/pull/45,24,24,18,10,10,8,94,—,—,—,—,CLOSED,CLOSED 2026-10-13 superseded by #42,3-oracle
 E3,38,oracle-task3,oracle-task3-grounded-creative-disclosure,Andreavilaro0,https://github.com/ruvebal/ttod/pull/38,24,24,18,10,10,8,94,—,—,—,—,CLOSED,CLOSED 2026-10-13 superseded by #42,3-oracle

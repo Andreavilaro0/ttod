@@ -1,13 +1,13 @@
-# Cohort PR scorecard — updated 2026-10-13 (evening)
+# Cohort PR scorecard — updated 2026-10-14 (afternoon)
 
 **Audience:** instructor only (not published under `docs/public/`).
 **Rubric:** §5 — C25 · A25 · T20 · X10 · CI10 · P10 = 100.
 **Evidence pack:** [`pr-status-2026-10-11/`](./pr-status-2026-10-11/INDEX.md) (archive; live gates below).
 
-**Snapshot:** 6 student PRs open (+ maintainer #9).  
-**Complete seams:** PWA · Accounts · **Oracle** (Tasks 1–7 via cumulative **#42**; leftover per-task PRs closed 2026-10-13).  
-**Post-seam:** PWA **#74** AI-use memo merged 2026-10-13.  
-**Still open:** Content #65 → #67 → #68 · Graph #52 → #55 → #71.
+**Snapshot:** 3 student PRs open (+ maintainer #9).  
+**Complete seams:** PWA · Accounts · **Oracle**.  
+**Graph progress:** Tasks 1–6 on `main` (#48 → #52 → #55 → #71 → #75 → #76); Tasks 7–10 not opened yet.  
+**Still open:** Content #65 → #67 → #68 only.
 
 ---
 
@@ -16,7 +16,7 @@
 | Group | Seam | Authors | Open stack |
 | --- | --- | --- | --- |
 | E1 | Content | `gontugithub` | #61✓→#62✓→#63✓→#64✓→**#65**→**#67**→**#68** (#43 merged) |
-| E2 | Graph | `gpfc-git` | #52→#55→#71 (#48 merged) |
+| E2 | Graph | `gpfc-git` | #48✓→#52✓→#55✓→#71✓→#75✓→#76✓ (Tasks 7–10 pending) |
 | E3 | Oracle | `Andreavilaro0` / fork `nbfrodri/ttod_team3` | **complete** — #42 cumulative; #44/#45/#38–#41 closed superseded |
 | E4 | PWA | `PRNovoa` | **complete** (+ #74 AI-use memo) |
 | E5 | Accounts | `alexxblaro16` / `Gonsiii11` on #58 | **complete** |
@@ -38,9 +38,11 @@
 | E1 | [#67](https://github.com/ruvebal/ttod/pull/67) **CHANGES_REQUESTED** | content-task6 · `content-task6-content-tests` | — | — | — | — | — | — | — | AMEND: propose-form component test | `CHANGES_REQUESTED` |
 | E1 | [#68](https://github.com/ruvebal/ttod/pull/68) **CHANGES_REQUESTED** | content-task9 · `content-task9-design-decision` | — | — | — | — | — | — | — | AMEND: design-decision tip alignment | `CHANGES_REQUESTED` |
 | E2 | [#48](https://github.com/ruvebal/ttod/pull/48) **MERGED** 2026-10-08 | graph-task1 · `graph-task1-fetch-from-api` | 25 | 24 | 20 | 10 | 10 | 9 | **98** | MERGED | — |
-| E2 | [#52](https://github.com/ruvebal/ttod/pull/52) **CHANGES_REQUESTED** | graph-task2 · `graph-task2-accessible-node-selection` | — | — | — | — | — | — | — | AMEND: keyboard focus navigation | `CHANGES_REQUESTED` |
-| E2 | [#55](https://github.com/ruvebal/ttod/pull/55) **CHANGES_REQUESTED** | graph-task3 · `graph-task3-task-filter-interaction` | — | — | — | — | — | — | — | AMEND: selection across filter | `CHANGES_REQUESTED` |
-| E2 | [#71](https://github.com/ruvebal/ttod/pull/71) **CHANGES_REQUESTED** | graph-task4 · `graph-task4-url-state-selection` | — | — | — | — | — | — | — | AMEND: CI FAILURE + URL sync | `CHANGES_REQUESTED` |
+| E2 | [#52](https://github.com/ruvebal/ttod/pull/52) **MERGED** 2026-10-14 | graph-task2 · `graph-task2-accessible-node-selection` | 24 | 24 | 18 | 10 | 10 | 9 | **95** | MERGED; spatial arrow focus nav | — |
+| E2 | [#55](https://github.com/ruvebal/ttod/pull/55) **MERGED** 2026-10-14 | graph-task3 · `graph-task3-task-filter-interaction` | 24 | 25 | 18 | 9 | 10 | 9 | **95** | MERGED; preserve selection across filter | — |
+| E2 | [#71](https://github.com/ruvebal/ttod/pull/71) **MERGED** 2026-10-14 | graph-task4 · `graph-task4-url-state-selection` | 25 | 24 | 20 | 9 | 10 | 9 | **97** | MERGED; `urlState.ts` + deep-link e2e | — |
+| E2 | [#75](https://github.com/ruvebal/ttod/pull/75) **MERGED** 2026-10-14 | graph-task5 · `graph-task5-layout-and-performance` | 24 | 22 | 18 | 10 | 10 | 9 | **93** | MERGED; O(n) section grouping + scale e2e (no DevTools shots) | — |
+| E2 | [#76](https://github.com/ruvebal/ttod/pull/76) **MERGED** 2026-10-14 | graph-task6 · `graph-task6-keyboard-operabililty` | 24 | 24 | 18 | 10 | 10 | 9 | **95** | MERGED; `focusable` + focus-visible + keyboard e2e | — |
 | E3 | [#44](https://github.com/ruvebal/ttod/pull/44) **CLOSED** 2026-10-13 | oracle-task1 · `oracle-task1-streamed-response-rendering` | 24 | 24 | 18 | 9 | 10 | 8 | **93** | CLOSED superseded by #42 (Task 1 on main via cumulative) | — |
 | E3 | [#45](https://github.com/ruvebal/ttod/pull/45) **CLOSED** 2026-10-13 | oracle-task2 · `oracle-task2-live-region-announcement` | 24 | 24 | 18 | 10 | 10 | 8 | **94** | CLOSED superseded by #42 | — |
 | E3 | [#38](https://github.com/ruvebal/ttod/pull/38) **CLOSED** 2026-10-13 | oracle-task3 · `oracle-task3-grounded-creative-disclosure` | 24 | 24 | 18 | 10 | 10 | 8 | **94** | CLOSED superseded by #42 | — |
@@ -73,7 +75,7 @@
 | Group | Scored n | Mean Σ | Median Σ | Notes |
 | --- | ---: | ---: | ---: | --- |
 | E1 Content | 5 | 96 | 98 | #61–#64 merged; #65/#67/#68 still open |
-| E2 Graph | 1 | 98 | 98 | stack still AMEND |
+| E2 Graph | 6 | 96 | 95 | Tasks 1–6 merged; 7–10 not opened |
 | E3 Oracle | 7 | 94 | 93 | **seam complete** (#42 cumulative; #44–#41 closed superseded) |
 | E4 PWA | 8 | 96 | 96 | **seam complete** (+ #74 memo) |
 | E5 Accounts | 7 | 92 | 92 | **seam complete** |
@@ -83,7 +85,7 @@
 ## Merge order (remaining)
 
 1. **Content:** (#61–#64 done) → #65 → #67 → #68  
-2. **Graph:** #52 → #55 → #71  
+2. **Graph:** Tasks 1–6 done; await Tasks 7–10 tips  
 3. **Oracle:** done (#42)  
 4. **Accounts:** done  
 5. **PWA:** done (+ #74 AI-use memo)  
@@ -100,4 +102,4 @@ Per-task PRs #44/#45/#38/#39/#40/#41 looked unmergeable (`DIRTY` / `CHANGES_REQU
 
 [`COHORT-PR-SCORECARD-2026-10-07.csv`](./COHORT-PR-SCORECARD-2026-10-07.csv) (rewritten same snapshot).
 
-_Updated: 2026-10-13 evening (#74 PWA AI-use memo)._
+_Updated: 2026-10-14 afternoon (Graph #52→#55→#71→#75→#76 merged)._
