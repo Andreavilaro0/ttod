@@ -11,7 +11,12 @@ import SlugRoute from '../pages/[locale]/wisdom/[slug].astro';
 const entry: WisdomEntry = {
   id: 'arch-001', section: 'architecture', level: 'advanced', tags: ['boundaries'],
   text: 'The module that knows its boundaries serves the whole.',
-  teaches: 'Boundaries', related: [], origin: 'human', lang: 'en',
+  teaches: 'Boundaries', related: ['arch-002'], origin: 'human', lang: 'en',
+  rights: { license: 'CC-BY-NC-SA-4.0', holder: 'ruvebal@crea-comm.net' },
+};
+const relatedEntry: WisdomEntry = {
+  id: 'arch-002', section: 'architecture', level: 'advanced', tags: ['boundaries'],
+  text: 'A boundary is a promise.', teaches: 'Boundaries', related: [], origin: 'human', lang: 'en',
   rights: { license: 'CC-BY-NC-SA-4.0', holder: 'ruvebal@crea-comm.net' },
 };
 const student = { id: 'usr-002', email: 'student@example.com', roles: ['student'] };
@@ -19,12 +24,12 @@ const student = { id: 'usr-002', email: 'student@example.com', roles: ['student'
 afterEach(() => vi.restoreAllMocks());
 
 // Each backend route answers on its own, so a test fails if the page asks for something unexpected.
-const mockBackend = (favorites: unknown, session: unknown = student) =>
+const mockBackend = (favorites: unknown, session: unknown = student, includeRelated = true) =>
   vi.spyOn(global, 'fetch').mockImplementation(async (input) => {
     const url = String(input);
     if (url.includes('/api/v1/auth/session')) return Response.json(session, { status: session ? 200 : 401 });
     if (url.includes('/api/v1/favorites')) return Response.json(favorites);
-    return Response.json([entry]);
+    return Response.json(includeRelated ? [entry, relatedEntry] : [entry]);
   });
 
 const renderDetail = async (headers: Record<string, string> = {}) => {
@@ -42,6 +47,21 @@ const renderDetail = async (headers: Record<string, string> = {}) => {
 const cookie = 'ttod_session=signed-session-token';
 
 describe('favorite button on the quote detail page', () => {
+  it('renders graph-related wisdom as same-locale links', async () => {
+    mockBackend([]);
+    const main = await renderDetail();
+
+    expect(main.querySelector('#related-wisdom-title')?.textContent).toBe('Related wisdom');
+    expect(main.querySelector('a[href="/en/wisdom/arch-002/"]')?.textContent).toBe('arch-002');
+  });
+
+  it('omits related navigation when a relationship is not in the locale payload', async () => {
+    mockBackend([], student, false);
+    const main = await renderDetail();
+
+    expect(main.querySelector('#related-wisdom-title')).toBeNull();
+  });
+
   it('without a session: the quote renders and no favorite control is emitted', async () => {
     const fetchSpy = mockBackend([]);
     const main = await renderDetail();
