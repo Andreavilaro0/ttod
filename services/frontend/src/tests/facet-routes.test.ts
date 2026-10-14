@@ -28,6 +28,7 @@ vi.mock('../content/wisdom', async (importOriginal) => {
 import LevelRoute from '../pages/[locale]/wisdom/levels/[level].astro';
 import SectionRoute from '../pages/[locale]/wisdom/sections/[section].astro';
 import TagRoute from '../pages/[locale]/wisdom/tags/[tag].astro';
+import WisdomIndexRoute from '../pages/[locale]/wisdom/index.astro';
 
 const entry = (id: string, section: string, level: WisdomEntry['level'], tags: string[]): WisdomEntry => ({
   id, section, level, tags,
@@ -87,6 +88,13 @@ describe('wisdom facet routes', () => {
     const main = await render(TagRoute, '/en/wisdom/tags/boundaries/', { locale: 'en', tag: 'boundaries' });
     expect(cardIds(main)).toEqual(['arch-001', 'arch-002']);
     expect(pills(main)).toEqual(['boundaries (2)', 'coupling (1)', 'simplicity (1)']);
+  });
+
+  it('links each wisdom card tag to its locale-scoped facet route', async () => {
+    fetchWisdom.mockResolvedValue(payload);
+    const main = await render(WisdomIndexRoute, '/en/wisdom/', { locale: 'en' });
+    const boundaries = main.querySelector('article nav[aria-label] a[href="/en/wisdom/tags/boundaries/"]');
+    expect(boundaries?.textContent?.trim()).toBe('boundaries');
   });
 
   it('filters by level and offers every sibling level', async () => {
