@@ -56,7 +56,7 @@ Each group trio is built as: **(1) own-module decision** · **(2) AI critical us
 
 ## E4 — PWA (`PRNovoa`) · seam: PWA & Local Operations
 
-*Seam complete (#51→#69); AI-use memo #74 merged.*
+*Seam complete (#51→#69); AI-use memo #74 merged. Tasks 8–9 (cross-team PR / formal review) **waived**.*
 
 1. **Learning — Cache-First vs Network-First.**  
    Name one asset class that must be Cache-First and one path that must stay Network-First (or bypass cache) for the Oracle stream. What user-visible failure appears if you swap them?
@@ -71,7 +71,7 @@ Each group trio is built as: **(1) own-module decision** · **(2) AI critical us
 
 ## E5 — Accounts (`alexxblaro16` / `Gonsiii11`) · seam: Accounts
 
-*Seam complete (#53→#58→#57→#72→#56→#73→#59).*
+*Seam complete (#53→#58→#57→#72→#56→#73→#59). Tasks 8–9 (cross-team PR / formal review) **waived**.*
 
 1. **Learning — two credentials, one API.**  
    Explain why a session cookie must not authorize `GET /api/v1/wisdom/random`, and why a Bearer PAT must not act as a browser session. What attack or foot-gun does that split prevent?
