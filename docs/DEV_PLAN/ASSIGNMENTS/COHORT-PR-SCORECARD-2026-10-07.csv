@@ -13,6 +13,8 @@ E2,55,graph-task3,graph-task3-task-filter-interaction,gpfc-git,https://github.co
 E2,71,graph-task4,graph-task4-url-state-selection,gpfc-git,https://github.com/ruvebal/ttod/pull/71,25,24,20,9,10,9,97,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-14 urlState + deep-link e2e,2-graph
 E2,75,graph-task5,graph-task5-layout-and-performance,gpfc-git,https://github.com/ruvebal/ttod/pull/75,24,22,18,10,10,9,93,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-14 O(n) grouping + scale e2e,2-graph
 E2,76,graph-task6,graph-task6-keyboard-operabililty,gpfc-git,https://github.com/ruvebal/ttod/pull/76,24,24,18,10,10,9,95,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-14 focusable + keyboard e2e,2-graph
+E2,77,graph-task7,graph-task7-graph-island-tests,gpfc-git,https://github.com/ruvebal/ttod/pull/77,24,24,20,10,10,9,97,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-15 GraphIsland component test,2-graph
+E2,78,graph-task8,graph-task8-pr-into-different-module,gpfc-git,https://github.com/ruvebal/ttod/pull/78,24,24,18,9,10,9,94,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-15 related-wisdom cross-module,2-graph
 E3,44,oracle-task1,oracle-task1-streamed-response-rendering,Andreavilaro0,https://github.com/ruvebal/ttod/pull/44,24,24,18,9,10,8,93,—,—,—,—,CLOSED,CLOSED 2026-10-13 superseded by #42 cumulative,3-oracle
 E3,45,oracle-task2,oracle-task2-live-region-announcement,Andreavilaro0,https://github.com/ruvebal/ttod/pull/45,24,24,18,10,10,8,94,—,—,—,—,CLOSED,CLOSED 2026-10-13 superseded by #42,3-oracle
 E3,38,oracle-task3,oracle-task3-grounded-creative-disclosure,Andreavilaro0,https://github.com/ruvebal/ttod/pull/38,24,24,18,10,10,8,94,—,—,—,—,CLOSED,CLOSED 2026-10-13 superseded by #42,3-oracle
