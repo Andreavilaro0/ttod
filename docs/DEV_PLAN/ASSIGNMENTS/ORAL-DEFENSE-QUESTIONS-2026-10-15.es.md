@@ -22,7 +22,7 @@ Cada trío tiene tres focos:
 
 ## E1 — Contenido (`gontugithub`)
 
-*Aún abiertos y sin amend: #65 · #67 · #68.*
+*Aún abiertos y sin amend: #65 · #67 · #68. Tareas 7–8 (PR / revisión en módulo ajeno) **exentas**.*
 
 1. **¿Por qué la proveniencia no puede vivir solo en el detalle?**  
    La tarea 5 pide licencia/fuente/proveniencia en el índice, en las facetas y en el detalle. Si solo aparece en el detalle, ¿qué ve mal quien solo hojea las tarjetas? Dad un ejemplo concreto.
@@ -52,7 +52,7 @@ Cada trío tiene tres focos:
 
 ## E3 — Oráculo (`Andreavilaro0` / fork `nbfrodri`)
 
-*Costura hecha con el PR acumulativo #42. Los PRs sueltos #44/#45/#38–#41 se cerraron porque ya estaban en `main`.*
+*Costura hecha con el PR acumulativo #42. Los PRs sueltos #44/#45/#38–#41 se cerraron porque ya estaban en `main`. Tareas 8–9 (PR / revisión en módulo ajeno) **exentas**.*
 
 1. **«Está en `main`» no es lo mismo que «este PR se puede mergear».**  
    El código de las tareas 1–6 entró por #42. Los PRs viejos por tarea seguían sucios. Explicad la diferencia. ¿Por qué cerrarlos no borra el trabajo ya mergeado?
@@ -67,7 +67,7 @@ Cada trío tiene tres focos:
 
 ## E4 — PWA (`PRNovoa`)
 
-*Costura hecha (#51→#69). Memoria de uso de IA: #74.*
+*Costura hecha (#51→#69). Memoria de uso de IA: #74. Tareas 8–9 (PR / revisión en módulo ajeno) **exentas**.*
 
 1. **Cache-First vs Network-First.**  
    Dad un tipo de fichero que deba ir Cache-First (p. ej. CSS/JS estático) y un path que deba ir a la red (p. ej. el stream del Oráculo). Si los intercambiáis, ¿qué falla a ojos del usuario?
@@ -82,7 +82,7 @@ Cada trío tiene tres focos:
 
 ## E5 — Cuentas (`alexxblaro16` / `Gonsiii11`)
 
-*Costura hecha (#53→#59).*
+*Costura hecha (#53→#59). Tareas 8–9 (PR / revisión en módulo ajeno) **exentas**.*
 
 1. **Dos credenciales, una API.**  
    ¿Por qué la cookie de sesión *no* debe valer para `GET /api/v1/wisdom/random`? ¿Por qué un Bearer PAT *no* debe actuar como sesión del navegador? ¿Qué mala práctica o ataque evita esa separación?

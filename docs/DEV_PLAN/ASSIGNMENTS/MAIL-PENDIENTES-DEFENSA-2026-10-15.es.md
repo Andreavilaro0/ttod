@@ -6,9 +6,14 @@
 
 Hola a todos,
 
-**Antes de la defensa de hoy:** este mensaje resume lo que aún falta en GitHub, por **equipo** (no por persona). Si podéis, **cualquier amend o tip de última hora es bienvenido** — un push con CI verde y el comentario `Ready for re-review` (o abrir el PR de proceso que falte) mejora la evidencia aunque llegue justo antes de la sesión. Si no da tiempo, lo hablamos en la defensa.
+**Antes de la defensa de hoy:** este mensaje resume lo que aún falta en GitHub, por **equipo** (no por persona). Si podéis, **cualquier amend de última hora es bienvenido** — un push con CI verde y el comentario `Ready for re-review` mejora la evidencia aunque llegue justo antes de la sesión. Si no da tiempo, lo hablamos en la defensa.
 
-**Aclaración (ya dicha en clase):** las tareas que pedían **revisar formalmente un PR de otro equipo** **no hace falta entregarlas**. Quedan exentas para todos los equipos.
+**Aclaración (ya dicha en clase):** quedan **exentas para todos los equipos** las tareas de proceso que pedían:
+
+1. **Revisar formalmente un PR de otro equipo**, y  
+2. **Abrir un PR / commitear en un módulo de otro equipo** (contribución cruzada de código).
+
+Quien ya las haya entregado (p. ej. el Grafo con el tip cross-module) no pierde nada: cuenta como hecho. Quien no las abrió, **no las debe**.
 
 ---
 
@@ -22,27 +27,25 @@ Hola a todos,
 
 En cada uno: corregid en la **misma rama**, CI en verde y comentario exacto: `Ready for re-review`.
 
-**Tip de proceso aún no abierto (sí cuenta):**
-
-- **Tarea 7** — Un PR en un módulo que no es el vuestro (contribución cruzada de código).  
-  *(La tarea 8 — revisión formal de un PR ajeno — está **exenta**.)*
+**Exentas:** tarea 7 (PR en módulo ajeno) · tarea 8 (revisión formal de PR ajeno).
 
 ---
 
 ### Equipo 2 — Grafo
 
-Las tareas **1–8** están en `main`. Bien.
+Las tareas **1–8** están en `main` (incluida la 8 cross-module, ya mergeada). Bien.
 
-**Tip de proceso aún no abierto (sí cuenta):**
+**Tip de proceso que sí puede aportar aún (si no está en el repo):**
 
-- **Tarea 10** — Documento de una decisión de diseño real para la defensa (alternativa considerada y por qué se descartó).  
-  *(La tarea 9 — revisión formal de un PR ajeno — está **exenta**.)*
+- **Tarea 10** — Documento de una decisión de diseño real para la defensa (alternativa considerada y por qué se descartó).
+
+**Exenta:** tarea 9 (revisión formal de PR ajeno). La 8 ya está hecha; si no la hubierais hecho, también estaría cubierta por la exención de “commitear en otro equipo”.
 
 ---
 
 ### Equipo 3 — Oráculo · Equipo 4 — PWA · Equipo 5 — Cuentas
 
-No hay PRs de estudiante abiertos con amend pendiente. Las costuras de producto están mergeadas. Las tareas de **revisión formal de PRs ajenos** están **exentas**. Si aún debéis un memo de decisión de diseño (tarea 10 de vuestra ficha) y no está en el repo, podéis aportarlo hoy o en la defensa.
+No hay PRs de estudiante abiertos con amend pendiente. Las costuras de producto están mergeadas. Exentas: revisión formal de PRs ajenos y PR/commits en módulo de otro equipo. Si aún debéis un memo de decisión de diseño (tarea 10 de vuestra ficha) y no está en el repo, podéis aportarlo hoy o en la defensa.
 
 ---
 

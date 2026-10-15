@@ -11,7 +11,7 @@ Each group trio is built as: **(1) own-module decision** · **(2) AI critical us
 
 ## E1 — Content (`gontugithub`) · seam: Content
 
-*Live tips still open: #65 provenance · #67 propose-form component test · #68 design-decision doc.*
+*Live tips still open: #65 provenance · #67 propose-form component test · #68 design-decision doc. Tasks 7–8 (cross-team PR / formal review) **waived**.*
 
 1. **Learning — provenance as a surface, not a field.**  
    Task 5 asks for source/rights/provenance on *every* quote view (index cards, facet listings, and detail). Why is “we put it on the detail page” not enough? What breaks for a reader who never opens the detail route?
@@ -41,7 +41,7 @@ Each group trio is built as: **(1) own-module decision** · **(2) AI critical us
 
 ## E3 — Oracle (`Andreavilaro0` / fork `nbfrodri`) · seam: Oracle
 
-*Seam complete via cumulative #42; per-task PRs #44/#45/#38–#41 closed as superseded.*
+*Seam complete via cumulative #42; per-task PRs #44/#45/#38–#41 closed as superseded. Tasks 8–9 (cross-team PR / formal review) **waived**.*
 
 1. **Learning — cumulative vs per-task tips.**  
    Product for Tasks 1–6 landed through #42’s stack while leftover per-task PRs looked `DIRTY` / unmergeable. In your own words: what is the difference between “the feature is on `main`” and “this tip branch is mergeable”? Why did closing superseded tips not erase the work?

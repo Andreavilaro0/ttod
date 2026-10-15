@@ -8,7 +8,7 @@ E1,65,content-task5,content-task5-provenance,gontugithub,https://github.com/ruve
 E1,67,content-task6,content-task6-content-tests,gontugithub,https://github.com/ruvebal/ttod/pull/67,,,,,,,,,—,—,CHANGES_REQUESTED,OPEN,AMEND propose-form component test,1-content
 E1,68,content-task9,content-task9-design-decision,gontugithub,https://github.com/ruvebal/ttod/pull/68,,,,,,,,,—,—,CHANGES_REQUESTED,OPEN,AMEND design-decision tip alignment,1-content
 E1,—,content-task8,formal-review-other-module,gontugithub,—,,,,,,,,,—,—,—,WAIVED,Instructor class waiver 2026-10-15,1-content
-E1,—,content-task7,pr-into-other-module,gontugithub,—,,,,,,,,,—,—,—,PENDING,No tip PR opened,1-content
+E1,—,content-task7,pr-into-other-module,gontugithub,—,,,,,,,,,—,—,—,WAIVED,Instructor class waiver 2026-10-15 no cross-team commits,1-content
 E2,48,graph-task1,graph-task1-fetch-from-api,gpfc-git,https://github.com/ruvebal/ttod/pull/48,25,24,20,10,10,9,98,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-08,2-graph
 E2,52,graph-task2,graph-task2-accessible-node-selection,gpfc-git,https://github.com/ruvebal/ttod/pull/52,24,24,18,10,10,9,95,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-14 spatial arrow focus,2-graph
 E2,55,graph-task3,graph-task3-task-filter-interaction,gpfc-git,https://github.com/ruvebal/ttod/pull/55,24,25,18,9,10,9,95,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-14 preserve selection across filter,2-graph
@@ -27,6 +27,7 @@ E3,40,oracle-task5,oracle-task5-preparing-state,Andreavilaro0,https://github.com
 E3,41,oracle-task6,oracle-task6-recovery-error-state,Andreavilaro0,https://github.com/ruvebal/ttod/pull/41,24,24,18,9,10,8,93,—,—,—,—,CLOSED,CLOSED 2026-10-13 superseded by #42,3-oracle
 E3,42,oracle-task7,oracle-task7-unit-component-tests,Andreavilaro0,https://github.com/ruvebal/ttod/pull/42,25,25,20,10,10,10,100,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-11 cumulative Tasks 1-7,3-oracle
 E3,—,oracle-task9,formal-review-other-module,Andreavilaro0,—,,,,,,,,,—,—,—,WAIVED,Instructor class waiver 2026-10-15,3-oracle
+E3,—,oracle-task8,pr-into-other-module,Andreavilaro0,—,,,,,,,,,—,—,—,WAIVED,Instructor class waiver 2026-10-15 no cross-team commits,3-oracle
 E4,37,pwa-task1-bad,main,PRNovoa,https://github.com/ruvebal/ttod/pull/37,,,,,,,,,—,—,—,CLOSED,superseded by #51,4-pwa
 E4,51,pwa-task1,pwa-task1-service-worker,PRNovoa,https://github.com/ruvebal/ttod/pull/51,24,24,20,10,10,9,97,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-08,4-pwa
 E4,46,pwa-task2,pwa-task2-offline-oracle,PRNovoa,https://github.com/ruvebal/ttod/pull/46,24,24,18,10,10,9,95,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-11,4-pwa
@@ -37,6 +38,7 @@ E4,60,pwa-task6,pwa-task6-performance,PRNovoa,https://github.com/ruvebal/ttod/pu
 E4,69,pwa-task7,pwa-task7-offline-tests,PRNovoa,https://github.com/ruvebal/ttod/pull/69,24,24,20,10,10,9,97,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-12,4-pwa
 E4,74,docs-pwa-ai-use,docs/team-4-ai-use,PRNovoa,https://github.com/ruvebal/ttod/pull/74,25,24,16,10,10,10,95,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-13 uso-ia-team-4.md AI-use memo,4-pwa
 E4,—,pwa-task9,formal-review-other-module,PRNovoa,—,,,,,,,,,—,—,—,WAIVED,Instructor class waiver 2026-10-15,4-pwa
+E4,—,pwa-task8,pr-into-other-module,PRNovoa,—,,,,,,,,,—,—,—,WAIVED,Instructor class waiver 2026-10-15 no cross-team commits,4-pwa
 E5,31,accounts-task1-old,task/1-ssr-auth,alexxblaro16,https://github.com/ruvebal/ttod/pull/31,,,,,,,,,—,—,—,CLOSED,replaced by #53,5-accounts-closed
 E5,32,accounts-task2-old,task/2-personal-library,alexxblaro16,https://github.com/ruvebal/ttod/pull/32,,,,,,,,,—,—,—,CLOSED,replaced by #58,5-accounts-closed
 E5,33,accounts-task3-old,task/3-proposal-endpoint,alexxblaro16,https://github.com/ruvebal/ttod/pull/33,,,,,,,,,—,—,—,CLOSED,replaced by #57,5-accounts-closed
@@ -50,3 +52,4 @@ E5,56,accounts-task5,accounts-task5-public-pat,alexxblaro16,https://github.com/r
 E5,73,accounts-task6,accounts-task6-api-guide,alexxblaro16,https://github.com/ruvebal/ttod/pull/73,24,24,16,8,10,9,91,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-11,5-accounts
 E5,59,accounts-task7,accounts-task7-auth-library-api-tests,alexxblaro16,https://github.com/ruvebal/ttod/pull/59,24,24,20,8,10,9,95,SUCCESS,—,—,APPROVED,MERGED,MERGED 2026-10-11,5-accounts
 E5,—,accounts-task9,formal-review-other-module,alexxblaro16,—,,,,,,,,,—,—,—,WAIVED,Instructor class waiver 2026-10-15,5-accounts
+E5,—,accounts-task8,pr-into-other-module,alexxblaro16,—,,,,,,,,,—,—,—,WAIVED,Instructor class waiver 2026-10-15 no cross-team commits,5-accounts
