@@ -18,3 +18,18 @@ test('layout is deterministic and URL state reads only tag', () => {
   assert.deepEqual(radialLayout(joined), radialLayout(joined));
   assert.equal(selectedTag('?tag=focus&ignored=yes'), 'focus');
 });
+
+test('layout preserves every node when a section contains many nodes', () => {
+  const largeNodes = Array.from({ length: 2000 }, (_, index) => ({
+    id: `a-${String(index).padStart(4, '0')}`,
+    section: 'a',
+    origin: 'human',
+    status: 'active',
+    text: `Node ${index}`,
+    lang: 'en',
+    tags: []
+  }));
+  const positioned = radialLayout(largeNodes);
+  assert.equal(positioned.length, largeNodes.length);
+  assert.deepEqual(positioned.map((node) => node.id).sort(), largeNodes.map((node) => node.id).sort());
+});

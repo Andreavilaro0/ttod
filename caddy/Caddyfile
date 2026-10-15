@@ -19,6 +19,7 @@
   }
 
   handle {
+    encode zstd gzip
     reverse_proxy frontend:4321
   }
 }

@@ -27,7 +27,11 @@ export function radialLayout(
   height = 620
 ): PositionedNode[] {
   const groups = new Map<string, Array<GraphNode & { tags: string[] }>>();
-  for (const node of nodes) groups.set(node.section, [...(groups.get(node.section) ?? []), node]);
+  for (const node of nodes) {
+    const sectionNodes = groups.get(node.section);
+    if (sectionNodes) sectionNodes.push(node);
+    else groups.set(node.section, [node]);
+  }
   const sections = [...groups.keys()].sort();
   const centerX = width / 2;
   const centerY = height / 2;
