@@ -32,7 +32,7 @@ export const quoteSlug = (entry: WisdomEntry) => entry.id;
 export const labels = {
   en: {
     wisdom: 'Wisdom', docs: 'Documentation', empty: 'No accepted English wisdom is available yet.',
-    sections: 'Sections', levels: 'Levels', tags: 'Tags', all: 'All wisdom', teaches: 'Teaches',
+    sections: 'Sections', levels: 'Levels', tags: 'Tags', all: 'All wisdom', teaches: 'Teaches', related: 'Related wisdom',
     back: 'Back to wisdom', entries: 'entries', notFound: 'Wisdom entry not found',
     noMatchesTitle: 'No matches', noMatches: 'No English wisdom entry carries this facet yet.',
     emptyTitle: 'Nothing here yet',
@@ -44,7 +44,7 @@ export const labels = {
   },
   es: {
     wisdom: 'Sabiduría', docs: 'Documentación', empty: 'Todavía no hay sabiduría aceptada en español.',
-    sections: 'Secciones', levels: 'Niveles', tags: 'Etiquetas', all: 'Toda la sabiduría', teaches: 'Enseña',
+    sections: 'Secciones', levels: 'Niveles', tags: 'Etiquetas', all: 'Toda la sabiduría', teaches: 'Enseña', related: 'Sabiduría relacionada',
     back: 'Volver a sabiduría', entries: 'entradas', notFound: 'Entrada de sabiduría no encontrada',
     noMatchesTitle: 'Sin coincidencias', noMatches: 'Ninguna entrada de sabiduría en español tiene esta faceta todavía.',
     emptyTitle: 'Todavía nada aquí',
@@ -64,4 +64,3 @@ export function frequencies(entries: WisdomEntry[], field: 'section' | 'level' |
   }
   return [...counts].sort(([left], [right]) => left.localeCompare(right));
 }
-
