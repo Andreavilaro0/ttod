@@ -2,6 +2,7 @@
 import Page from '../../../layouts/Page.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import EmptyState from '../../../components/EmptyState.astro';
+import ProvenanceBlock from '../../../components/ProvenanceBlock.astro';
 import FavoriteButton from '../../../components/favorites/FavoriteButton';
 import { isLocale, labels, loadWisdom } from '../../../content/wisdom';
 import { SESSION_COOKIE_NAME, getSessionUser } from '../../../lib/auth.server';
@@ -47,7 +48,7 @@ const crumbs = quote
     {failed ? <EmptyState variant="error" title={copy.errorTitle} message={copy.errorMessage} /> : !quote ? <EmptyState title={copy.notFound} message={copy.notFoundMessage} action={{ label: copy.back, href: `/${locale}/wisdom/` }} /> : <>
       <article class="ttod-card"><blockquote>{quote.text}</blockquote><p><strong>{copy.teaches}:</strong> {quote.teaches}</p><p class="ttod-meta">{quote.id} · {quote.section} · {quote.level} · {quote.origin} · {quote.lang}</p><div class="ttod-clusters">{quote.tags.map((tag) => <a class="ttod-pill" href={`/${locale}/wisdom/tags/${tag}/`}>#{tag}</a>)}</div>{user && <FavoriteButton client:load quoteId={quote.id} initiallySaved={alreadySaved} />}</article>
       {relatedEntries.length > 0 && <section aria-labelledby="related-wisdom-title"><h2 id="related-wisdom-title">{copy.related}</h2><nav class="ttod-clusters" aria-label={copy.related}>{relatedEntries.map((relatedEntry) => <a class="ttod-pill" href={`/${locale}/wisdom/${relatedEntry.id}/`}>{relatedEntry.id}</a>)}</nav></section>}
-      <footer class="ttod-meta">{quote.rights.holder ?? 'Rubén Vega Balbás'} · {quote.rights.license} · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></footer>
+      <ProvenanceBlock entry={quote} locale={locale} />
     </>}
   </main>
 </Page>

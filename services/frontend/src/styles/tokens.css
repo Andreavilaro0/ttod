@@ -35,3 +35,7 @@ body { margin: 0; }
 .ttod-breadcrumbs a { color: var(--ttod-color-accent); }
 .ttod-breadcrumbs li[aria-current="page"] { color: var(--ttod-color-muted); }
 .ttod-pill[aria-current="page"] { text-decoration: underline; text-underline-offset: 3px; }
+.ttod-provenance { display: grid; grid-template-columns: auto 1fr; gap: var(--ttod-space-1, .25rem) var(--ttod-space-3, .75rem); margin: var(--ttod-space-4) 0 0; font: var(--ttod-text-sm)/1.5 var(--ttod-font-ui); color: var(--ttod-color-muted); }
+.ttod-provenance dt { font-weight: 600; }
+.ttod-provenance dd { margin: 0; }
+.ttod-provenance-compact { margin-top: var(--ttod-space-2, .5rem); }

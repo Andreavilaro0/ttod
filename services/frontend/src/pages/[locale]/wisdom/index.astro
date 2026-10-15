@@ -2,6 +2,7 @@
 import Page from '../../../layouts/Page.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import EmptyState from '../../../components/EmptyState.astro';
+import ProvenanceBlock from '../../../components/ProvenanceBlock.astro';
 import { frequencies, isLocale, labels, loadWisdom, quoteSlug } from '../../../content/wisdom';
 import '../../../styles/tokens.css';
 const locale = Astro.params.locale;
@@ -18,7 +19,7 @@ const copy = labels[locale];
       <section><h2>{copy.sections}</h2><div class="ttod-clusters">{frequencies(entries, 'section').map(([value, count]) => <a class="ttod-pill" href={`/${locale}/wisdom/sections/${value}/`}>{value} ({count})</a>)}</div></section>
       <section><h2>{copy.levels}</h2><div class="ttod-clusters">{frequencies(entries, 'level').map(([value, count]) => <a class="ttod-pill" href={`/${locale}/wisdom/levels/${value}/`}>{value} ({count})</a>)}</div></section>
       <section><h2>{copy.tags}</h2><div class="ttod-clusters">{frequencies(entries, 'tags').map(([value, count]) => <a class="ttod-pill" href={`/${locale}/wisdom/tags/${value}/`}>{value} ({count})</a>)}</div></section>
-      <section><h2>{copy.all}</h2><div class="ttod-grid">{entries.map((entry) => <article class="ttod-card"><blockquote>{entry.text}</blockquote><a href={`/${locale}/wisdom/${quoteSlug(entry)}/`}>{entry.id}</a><p class="ttod-meta">{entry.section} · {entry.level}</p><nav aria-label={`${entry.id} ${copy.tags}`} class="ttod-clusters">{entry.tags.map((tag) => <a class="ttod-pill" href={`/${locale}/wisdom/tags/${tag}/`}>{tag}</a>)}</nav><footer class="ttod-meta">{entry.rights.holder ?? 'Rubén Vega Balbás'} · {entry.rights.license}</footer></article>)}</div></section>
+      <section><h2>{copy.all}</h2><div class="ttod-grid">{entries.map((entry) => <article class="ttod-card"><blockquote>{entry.text}</blockquote><a href={`/${locale}/wisdom/${quoteSlug(entry)}/`}>{entry.id}</a><p class="ttod-meta">{entry.section} · {entry.level}</p><nav aria-label={`${entry.id} ${copy.tags}`} class="ttod-clusters">{entry.tags.map((tag) => <a class="ttod-pill" href={`/${locale}/wisdom/tags/${tag}/`}>{tag}</a>)}</nav><ProvenanceBlock entry={entry} locale={locale} variant="compact" /></article>)}</div></section>
     </>}
   </main>
 </Page>
