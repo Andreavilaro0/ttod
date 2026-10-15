@@ -26,7 +26,7 @@ Each group trio is built as: **(1) own-module decision** · **(2) AI critical us
 
 ## E2 — Graph (`gpfc-git`) · seam: Graph
 
-*Tasks 1–8 on main (#48 → … → #78). Tips 9–10 not opened yet.*
+*Tasks 1–8 on main (#48 → … → #78). Tip 9 (formal review of another team’s PR) **waived**. Tip 10 (design-decision memo) still owed if not filed.*
 
 1. **Learning — URL as source of truth.**  
    In #71, user actions use `pushState` and load/corrections use `replaceState`. Explain one concrete bug you would get if *every* URL write used `pushState` (including invalid-tag cleanup on first paint).

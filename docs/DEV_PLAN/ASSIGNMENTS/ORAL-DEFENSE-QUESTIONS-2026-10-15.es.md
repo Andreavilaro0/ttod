@@ -37,7 +37,7 @@ Cada trío tiene tres focos:
 
 ## E2 — Grafo (`gpfc-git`)
 
-*Tareas 1–8 en `main` (#48 … #78). Faltan tips 9–10 (aún no abiertos).*
+*Tareas 1–8 en `main` (#48 … #78). Tarea 9 (revisión de PR ajeno) **exenta**. Falta tip 10 (memo de decisión) si no está en el repo.*
 
 1. **`pushState` vs `replaceState`.**  
    En #71, al elegir un nodo o un tag usáis `pushState` (entra en el historial). Al corregir una URL inválida usáis `replaceState` (no ensucia el historial). Si *todo* fuera `pushState`, incluido limpiar un `?tag=basura` al cargar: ¿qué bug concreto vería el usuario al pulsar Atrás?
