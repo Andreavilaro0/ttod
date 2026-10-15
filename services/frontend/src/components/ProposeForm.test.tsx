@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import '@testing-library/jest-dom/vitest';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
@@ -79,5 +80,48 @@ describe('ProposeForm', () => {
     render(<ProposeForm lang="es" />);
     expect(screen.getByLabelText('Texto de la cita')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Proponer' })).toBeInTheDocument();
+  });
+});
+
+// Task 6: the Accessibility Definition of Done, driven only by the keyboard (user-event, not fireEvent).
+describe('ProposeForm — keyboard and accessible errors', () => {
+  it('can be filled and submitted with the keyboard alone', async () => {
+    proposalsMocks.submitProposal.mockResolvedValue({ ok: true, id: 'p-1' });
+    const user = userEvent.setup();
+    render(<ProposeForm lang="en" />);
+
+    await user.tab();
+    expect(screen.getByLabelText('Quote text')).toHaveFocus();
+    await user.keyboard('Simplicity is the final sophistication.');
+    await user.tab();
+    expect(screen.getByLabelText('Section')).toHaveFocus();
+    await user.keyboard('wisdom');
+
+    // Source, Level, Tags and What it teaches come before the submit button in tab order.
+    for (let i = 0; i < 5; i += 1) await user.tab();
+    expect(screen.getByRole('button', { name: 'Propose' })).toHaveFocus();
+    await user.keyboard('{Enter}');
+
+    await waitFor(() => expect(proposalsMocks.submitProposal).toHaveBeenCalledWith({
+      text: 'Simplicity is the final sophistication.', section: 'wisdom', lang: 'en',
+    }));
+  });
+
+  it.each(['en', 'es'] as const)('%s: an invalid keyboard submit moves focus to the first error and ties the message to its field', async (lang) => {
+    const user = userEvent.setup();
+    render(<ProposeForm lang={lang} />);
+    const text = screen.getByLabelText(lang === 'es' ? 'Texto de la cita' : 'Quote text');
+
+    for (let i = 0; i < 7; i += 1) await user.tab();
+    await user.keyboard('{Enter}');
+
+    expect(text).toHaveFocus();
+    expect(text).toHaveAttribute('aria-invalid', 'true');
+    // The error is text referenced by aria-describedby, not just a colour change.
+    const message = document.getElementById(text.getAttribute('aria-describedby') ?? '');
+    expect(message).toHaveAttribute('role', 'alert');
+    expect(message?.textContent?.trim()).not.toBe('');
+    expect(text).toHaveAccessibleDescription(message?.textContent ?? '');
+    expect(proposalsMocks.submitProposal).not.toHaveBeenCalled();
   });
 });
