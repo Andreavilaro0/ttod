@@ -95,6 +95,14 @@ class SnapshotService:
         return self._wisdom
 
     def graph_bytes(self) -> bytes:
+        # Solo el grafo: la clave (mtime + sha256 de los bytes) cuesta ~1 ms; volver a
+        # parsear el YAML de 450 KB costaba ~1 s en cada petición aunque no hubiera cambiado.
+        # Si la clave coincide, el grafo guardado es el mismo que daría _refresh().
+        raw = self.repository.read_bytes()
+        key = (self.ttod_path.stat().st_mtime_ns, hashlib.sha256(raw).hexdigest())
+        with self._lock:
+            if key == self._cache_key:
+                return self._graph_bytes
         self._refresh()
         return self._graph_bytes
 

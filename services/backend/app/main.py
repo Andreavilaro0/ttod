@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+import hashlib
 import logging
 import random
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import Response, StreamingResponse
 
 from ttod_core.proposals import create_proposal
@@ -91,8 +92,16 @@ def create_app(settings: Settings | None = None, oracle: OracleService | None = 
         return random.choice(quotes)
 
     @app.get("/api/v1/graph")
-    def graph():
-        return Response(content=snapshots.graph_bytes(), media_type="application/json")
+    def graph(request: Request):
+        body = snapshots.graph_bytes()
+        # ETag del cuerpo: quien ya lo tiene recibe un 304 vacío en vez de 138 KB.
+        # Un minuto de vida (más diez de margen sirviendo el viejo mientras se revalida)
+        # deja que Caddy o un CDN lo sirvan sin despertar al backend.
+        etag = f'"{hashlib.sha256(body).hexdigest()[:32]}"'
+        headers = {"ETag": etag, "Cache-Control": "public, max-age=60, stale-while-revalidate=600"}
+        if etag in request.headers.get("if-none-match", ""):
+            return Response(status_code=304, headers=headers)
+        return Response(content=body, media_type="application/json", headers=headers)
 
     @app.post("/api/v1/oracle/stream")
     def oracle_stream(payload: OracleQueryPayload):
