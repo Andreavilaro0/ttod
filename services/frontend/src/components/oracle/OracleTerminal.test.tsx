@@ -21,7 +21,12 @@ vi.mock('framer-motion', async () => {
     const { children, initial: _initial, animate: _animate, exit: _exit, transition: _transition, ...rest } = props;
     return React.createElement('div', { ...rest, ref }, children as React.ReactNode);
   });
-  return { AnimatePresence: ({ children }: { children: React.ReactNode }) => children, motion: { div: component, article: component }, useReducedMotion: () => true };
+  const passThrough = ({ children }: { children: React.ReactNode }) => children;
+  return {
+    AnimatePresence: passThrough, LazyMotion: passThrough, domAnimation: {},
+    motion: { div: component, article: component }, m: { div: component, article: component },
+    useReducedMotion: () => true,
+  };
 });
 
 function sseResponse(chunks: unknown[]): Response {
